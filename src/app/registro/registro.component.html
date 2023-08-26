@@ -1,35 +1,39 @@
-<div class="container border border-success rounded-4 mt-4 mb-4" data-bs-theme="dark">
-    <div class="titulo pt-3 pb-2">
-        <h3 class="text-white text-center">Registrarse</h3>
+<div class="container-fluid absolute">
+    <div class="row vh-100 align-items-center ps-4 pe-4">
+        <div class="container border border-success rounded-4" data-bs-theme="dark">
+            <div class="titulo pt-3 pb-2">
+                <h3 class="text-white text-center">Registrarse</h3>
+            </div>
+            <form [formGroup]="formUsuario" (ngSubmit)="registrarse()">
+                <div class="mb-3">
+                    <label class="form-label text-white">Nombre</label>
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="Ingrese su nombre">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">Apellido</label>
+                    <input formControlName="apellido" type="text" class="form-control" placeholder="Ingrese su apellido">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">Edad</label>
+                    <input formControlName="edad" type="number" class="form-control" placeholder="Digite su edad">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">Correo electrónico</label>
+                    <input formControlName="correo" type="email" class="form-control" placeholder="Ingrese su correo electrónico">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">Contraseña</label>
+                    <input formControlName="contrasenia" type="password" class="form-control" placeholder="Ingrese su contraseña">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">Confirmar Contraseña</label>
+                    <input formControlName="repContrasenia" type="password" class="form-control" placeholder="Repita su contraseña">
+                    <div class="form-text">Nunca compartiremos su correo electrónico y contraseña con nadie más.</div>
+                </div>
+                <div class="boton text-center mb-3">
+                    <button type="submit" class="btn btn-success pe-3 ps-3">Registrarse</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <form [formGroup]="formUsuario" (ngSubmit)="registrarse()">
-        <div class="mb-3">
-            <label class="form-label text-white">Nombre</label>
-            <input formControlName="nombre" type="text" class="form-control" placeholder="Ingrese su nombre">
-        </div>
-        <div class="mb-3">
-            <label class="form-label text-white">Apellido</label>
-            <input formControlName="apellido" type="text" class="form-control" placeholder="Ingrese su apellido">
-        </div>
-        <div class="mb-3">
-            <label class="form-label text-white">Edad</label>
-            <input formControlName="edad" type="number" class="form-control" placeholder="Digite su edad">
-        </div>
-        <div class="mb-3">
-            <label class="form-label text-white">Correo electrónico</label>
-            <input formControlName="correo" type="email" class="form-control" placeholder="Ingrese su correo electrónico">
-        </div>
-        <div class="mb-3">
-            <label class="form-label text-white">Contraseña</label>
-            <input formControlName="contrasenia" type="password" class="form-control" placeholder="Ingrese su contraseña">
-        </div>
-        <div class="mb-3">
-            <label class="form-label text-white">Confirmar Contraseña</label>
-            <input formControlName="repContrasenia" type="password" class="form-control" placeholder="Repita su contraseña">
-            <div class="form-text">Nunca compartiremos su correo electrónico y contraseña con nadie más.</div>
-        </div>
-        <div class="boton text-center mb-3">
-            <button type="submit" class="btn btn-success pe-3 ps-3">Registrarse</button>
-        </div>
-    </form>
 </div>
