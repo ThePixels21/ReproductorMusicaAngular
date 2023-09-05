@@ -2,36 +2,39 @@
     <div class="row vh-100 align-items-center ps-4 pe-4">
         <div class="container border border-success rounded-4" data-bs-theme="dark">
             <div class="titulo pt-3 pb-2">
-                <h3 class="text-white text-center">Registrarse</h3>
+                <h3 class="text-white text-center">Sign up</h3>
             </div>
             <form [formGroup]="formUsuario" (ngSubmit)="registrarse()">
                 <div class="mb-3">
-                    <label class="form-label text-white">Nombre</label>
-                    <input formControlName="nombre" type="text" class="form-control" placeholder="Ingrese su nombre">
+                    <label class="form-label text-white">Name</label>
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="Enter your name">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label text-white">Apellido</label>
-                    <input formControlName="apellido" type="text" class="form-control" placeholder="Ingrese su apellido">
+                    <label class="form-label text-white">Surname</label>
+                    <input formControlName="apellido" type="text" class="form-control" placeholder="Enter your surname">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label text-white">Edad</label>
-                    <input formControlName="edad" type="number" class="form-control" placeholder="Digite su edad">
+                    <label class="form-label text-white">Nickname</label>
+                    <input formControlName="apellido" type="text" class="form-control" placeholder="Enter your nickname">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label text-white">Correo electrónico</label>
-                    <input formControlName="correo" type="email" class="form-control" placeholder="Ingrese su correo electrónico">
+                    <label class="form-label text-white">Age</label>
+                    <input formControlName="edad" type="number" class="form-control" placeholder="Type your age">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label text-white">Contraseña</label>
-                    <input formControlName="contrasenia" type="password" class="form-control" placeholder="Ingrese su contraseña">
+                    <label class="form-label text-white">Email</label>
+                    <input formControlName="correo" type="email" class="form-control" placeholder="Enter your email">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label text-white">Confirmar Contraseña</label>
-                    <input formControlName="repContrasenia" type="password" class="form-control" placeholder="Repita su contraseña">
-                    <div class="form-text">Nunca compartiremos su correo electrónico y contraseña con nadie más.</div>
+                    <label class="form-label text-white">Password</label>
+                    <input formControlName="contrasenia" type="password" class="form-control" placeholder="Enter your password">
                 </div>
-                <div class="boton text-center mb-3">
-                    <button type="submit" class="btn btn-success pe-3 ps-3">Registrarse</button>
+                <div class="mb-3">
+                    <label class="form-label text-white">Confirm password</label>
+                    <input formControlName="repContrasenia" type="password" class="form-control" placeholder="Enter your password again">
+                </div>
+                <div class="boton text-center mb-4 d-grid gap-2 col-3 mx-auto">
+                    <button type="submit" class="btn btn-success pe-3 ps-3 rounded-pill" routerLink="/login">Sign up</button>
                 </div>
             </form>
         </div>
