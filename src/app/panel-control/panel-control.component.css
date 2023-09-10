@@ -1,0 +1,7 @@
+.ftr {
+    width: 100%;
+    position: fixed;
+    bottom: 0 !important;
+    left: 0;
+    z-index: 9;
+}

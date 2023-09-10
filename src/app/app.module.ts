@@ -12,6 +12,7 @@ import { ItemsComponent } from './items/items.component';
 import { BarraBusquedaComponent } from './barra-busqueda/barra-busqueda.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { ArtistsComponent } from './artists/artists.component';
+import { PanelControlComponent } from './panel-control/panel-control.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ArtistsComponent } from './artists/artists.component';
     ItemsComponent,
     BarraBusquedaComponent,
     PlaylistsComponent,
-    ArtistsComponent
+    ArtistsComponent,
+    PanelControlComponent
   ],
   imports: [
     BrowserModule,
