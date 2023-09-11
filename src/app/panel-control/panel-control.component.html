@@ -9,12 +9,12 @@
             </div>
             <div class="col-4 text-center">
                 <div class="d-flex justify-content-center">
-                    <div class="col-4"><button (click)="previous()" class="btn"><img src="../../assets/icon/back.svg"></button></div>
+                    <div class="col-4"><button (click)="previous()" class="btn"><img [src]="icBack"></button></div>
                     <div class="col-4"><button (click)="play()" class="btn">
-                        <img *ngIf="!pausado" src="../../assets/icon/pause.svg">
-                        <img *ngIf="pausado" src="../../assets/icon/play.svg">
+                        <img *ngIf="!pausado" [src]="icPause">
+                        <img *ngIf="pausado" [src]="icPlay">
                     </button></div>
-                    <div class="col-4"><button (click)="next()" class="btn"><img src="../../assets/icon/next.svg"></button></div>
+                    <div class="col-4"><button (click)="next()" class="btn"><img [src]="icNext"></button></div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
                     <div class="text-center me-2">
@@ -27,9 +27,9 @@
             </div>
             <div class="col-4 d-flex pe-2 align-items-center justify-content-end">
                 <div class="pe-2">
-                    <img *ngIf="volumeSlider >= 9" src="../../assets/icon/volume-max.svg">
-                    <img *ngIf="volumeSlider < 9 && volumeSlider > 0" src="../../assets/icon/volume-min.svg">
-                    <img *ngIf="volumeSlider == 0" src="../../assets/icon/volume-xmark.svg">
+                    <img *ngIf="volumeSlider >= 9" [src]="icVolumeMax">
+                    <img *ngIf="volumeSlider < 9 && volumeSlider > 0" [src]="icVolumeMin">
+                    <img *ngIf="volumeSlider == 0" [src]="icVolumeX">
                 </div>
                 <div>
                     <mat-slider (change)="adjustVolume()" class="volume" step="1" min="0" max="16"><input matSliderThumb [(ngModel)]="volumeSlider"></mat-slider>

@@ -17,8 +17,8 @@
                 <div class="col-6"><a (click)="play(i)" class="tittle" [ngClass]="i == currentSongIndex ? '':'tittle h'">{{song.tittle}}</a></div>
                 <div class="col-5">{{song.artist}}</div>
                 <div class="col-1 text-end"><a href="">
-                    <img *ngIf="i != currentSongIndex" src="../../assets/icon/more_horizontal_lines.svg">
-                    <img *ngIf="i == currentSongIndex" src="../../assets/icon/more_horizontal_lines_white.svg">
+                    <img *ngIf="i != currentSongIndex" [src]="icLinesSuccess">
+                    <img *ngIf="i == currentSongIndex" [src]="icLinesWhite">
                 </a></div>
             </div>
         </li>

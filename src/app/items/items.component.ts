@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { IMusic } from './imusic';
+import { IMusic } from './IMusic';
 
 @Component({
   selector: 'app-items',
@@ -8,6 +8,9 @@ import { IMusic } from './imusic';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent {
+
+  icLinesSuccess = '../../assets/icon/more_horizontal_lines.svg';
+  icLinesWhite = '../../assets/icon/more_horizontal_lines_white.svg';
 
   audio = new Audio();
   currentSongIndex: any = undefined;

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { IMusic } from '../items/imusic';
+import { IMusic } from '../items/IMusic';
 
 @Component({
   selector: 'app-panel-control',
@@ -8,6 +8,14 @@ import { IMusic } from '../items/imusic';
   styleUrls: ['./panel-control.component.css']
 })
 export class PanelControlComponent {
+
+  icNext = '../../assets/icon/next.svg';
+  icBack = '../../assets/icon/back.svg';
+  icPause = '../../assets/icon/pause.svg';
+  icPlay = '../../assets/icon/play.svg';
+  icVolumeMax = '../../assets/icon/volume-max.svg';
+  icVolumeMin = '../../assets/icon/volume-min.svg';
+  icVolumeX = '../../assets/icon/volume-xmark.svg';
 
   volumeSlider = 9;
 
