@@ -14,6 +14,6 @@ export class LoginComponent {
   })
 
   iniciarSesion() {
-
+    console.log("Correo: "+this.formLogin.get('correo')?.value+", contraseña: "+this.formLogin.get('contrasenia')?.value);
   }
 }

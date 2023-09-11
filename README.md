@@ -1,3 +1,6 @@
+# Music
+This project aims to be a music player application, which will include user registration, allowing users to upload and manage their songs. Additionally, users will have the ability to create playlists with their desired songs. The primary objective is to provide a seamless music playback experience while enabling users to curate their music collections effortlessly.
+
 # Reproductor
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.7.
