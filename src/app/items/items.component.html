@@ -2,207 +2,35 @@
     <ul class="list-group pb-2">
         <li class="list-group-item pb-0">
             <div class="row">
-                <div class="col-6"><h6>Name</h6></div>
-                <div class="col-6"><h6>Artist</h6></div>
+                <div class="col-6">
+                    <h6>Name</h6>
+                </div>
+                <div class="col-6">
+                    <h6>Artist</h6>
+                </div>
             </div>
         </li>
     </ul>
     <ul class="list-group">
-        <li class="list-group-item">
+        <li *ngFor="let song of musicList, let i = index" [attr.data-index]="i" class="list-group-item" [ngClass]="i == currentSongIndex ? 'active':''">
             <div class="row align-items-center">
-                <div class="col-6">Someone You Love</div>
-                <div class="col-5">Lewis Capaldi</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">November Rain</div>
-                <div class="col-5">Guns N' Roses</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Billie Jean</div>
-                <div class="col-5">Michael Jackson</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Talking To The Moon</div>
-                <div class="col-5">Bruno Mars</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Another Love</div>
-                <div class="col-5">Tom Odell</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Someone You Love</div>
-                <div class="col-5">Lewis Capaldi</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">November Rain</div>
-                <div class="col-5">Guns N' Roses</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Billie Jean</div>
-                <div class="col-5">Michael Jackson</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Talking To The Moon</div>
-                <div class="col-5">Bruno Mars</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Another Love</div>
-                <div class="col-5">Tom Odell</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Another Love</div>
-                <div class="col-5">Tom Odell</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Someone You Love</div>
-                <div class="col-5">Lewis Capaldi</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">November Rain</div>
-                <div class="col-5">Guns N' Roses</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Billie Jean</div>
-                <div class="col-5">Michael Jackson</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Talking To The Moon</div>
-                <div class="col-5">Bruno Mars</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Another Love</div>
-                <div class="col-5">Tom Odell</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Another Love</div>
-                <div class="col-5">Tom Odell</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Someone You Love</div>
-                <div class="col-5">Lewis Capaldi</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">November Rain</div>
-                <div class="col-5">Guns N' Roses</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Billie Jean</div>
-                <div class="col-5">Michael Jackson</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Talking To The Moon</div>
-                <div class="col-5">Bruno Mars</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Another Love</div>
-                <div class="col-5">Tom Odell</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Another Love</div>
-                <div class="col-5">Tom Odell</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Someone You Love</div>
-                <div class="col-5">Lewis Capaldi</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">November Rain</div>
-                <div class="col-5">Guns N' Roses</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Billie Jean</div>
-                <div class="col-5">Michael Jackson</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Talking To The Moon</div>
-                <div class="col-5">Bruno Mars</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-6">Another Love</div>
-                <div class="col-5">Tom Odell</div>
-                <div class="col-1 text-end"><a href=""><img src="../../assets/icon/more_horizontal_lines.svg"></a></div>
+                <div class="col-6"><a (click)="play(i)" class="tittle" [ngClass]="i == currentSongIndex ? '':'tittle h'">{{song.tittle}}</a></div>
+                <div class="col-5">{{song.artist}}</div>
+                <div class="col-1 text-end"><a href="">
+                    <img *ngIf="i != currentSongIndex" src="../../assets/icon/more_horizontal_lines.svg">
+                    <img *ngIf="i == currentSongIndex" src="../../assets/icon/more_horizontal_lines_white.svg">
+                </a></div>
             </div>
         </li>
     </ul>
+</div>
+
+<div>
+    <app-panel-control 
+    [musicList]="musicList" 
+    [(pausado)]="pausado" 
+    [(currentSong)]="currentSong" 
+    [(currentSongIndex)]="currentSongIndex" 
+    [(audio)]="audio">
+    </app-panel-control>
 </div>

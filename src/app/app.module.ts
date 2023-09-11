@@ -13,6 +13,14 @@ import { BarraBusquedaComponent } from './barra-busqueda/barra-busqueda.componen
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { PanelControlComponent } from './panel-control/panel-control.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//Material
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -31,7 +39,13 @@ import { PanelControlComponent } from './panel-control/panel-control.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTableModule,
+    MatButtonModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent, RegistroComponent]

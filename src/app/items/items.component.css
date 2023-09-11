@@ -1,0 +1,14 @@
+a.tittle {
+    text-decoration: none;
+    cursor: pointer;
+    color: #dee2e6;
+}
+
+a.tittle.h:hover {
+    color: #198754;
+}
+
+.active {
+    background-color: #198754;
+    border-color: #198754;
+}

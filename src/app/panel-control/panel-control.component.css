@@ -5,3 +5,27 @@
     left: 0;
     z-index: 9;
 }
+
+.btn:active {
+    border-color: #198754 !important;
+}
+
+/* Smartphones (portrait) */
+@media only screen and (max-width: 320px) {
+    mat-slider.duration {
+        width: 100px;
+    }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 1024px) {
+    mat-slider.duration {
+        width: 200px;
+    }
+}
+
+/* Desktops and laptops  */
+@media only screen and (min-width: 1224px) {
+    mat-slider.duration {
+        width: 300px;
+    }
+}
