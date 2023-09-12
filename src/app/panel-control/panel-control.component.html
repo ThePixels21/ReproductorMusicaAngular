@@ -3,7 +3,7 @@
         <div class="d-flex flex-inline">
             <div class="col-4 d-flex align-items-center ps-2">
                 <div>
-                    <div>{{currentSong.tittle}}</div>
+                    <div>{{currentSong.title}}</div>
                     <div class="text-body-secondary">{{currentSong.artist}}</div>
                 </div>
             </div>
@@ -18,10 +18,10 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
                     <div class="text-center me-2">
-                        0:00&nbsp;/&nbsp;0:00
+                        {{currentTime}}&nbsp;/&nbsp;{{musicLength}}
                     </div>
                     <div>
-                        <mat-slider class="slider-full duration" color="primary" min="0" max="1"><input matSliderThumb></mat-slider>
+                        <mat-slider (change)="adjustDuration()" class="slider-full duration" color="primary" min="0" max="{{duration}}"><input matSliderThumb [(ngModel)]="audio.currentTime"></mat-slider>
                     </div>
                 </div>
             </div>

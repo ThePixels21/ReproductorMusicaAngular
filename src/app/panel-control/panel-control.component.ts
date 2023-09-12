@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { IMusic } from '../items/IMusic';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-panel-control',
@@ -19,6 +20,10 @@ export class PanelControlComponent {
 
   volumeSlider = 9;
 
+  @Input() musicLength: string = '0:00';
+  @Input() duration: number = 1;
+  @Input() currentTime: string = '0:00';
+
   @Input() pausado: boolean = true;
   @Output() pausadoChange = new EventEmitter<boolean>();
 
@@ -29,7 +34,7 @@ export class PanelControlComponent {
   @Output() audioChange = new EventEmitter<any>();
 
   @Input() currentSong: IMusic = {
-    tittle: '',
+    title: '',
     artist: '',
     url: ''
   };
@@ -59,6 +64,10 @@ export class PanelControlComponent {
   adjustVolume() {
     this.audio.volume = this.volumeSlider / 16;
     this.audioChange.emit(this.audio)
+  }
+
+  adjustDuration() {
+    this.audio.currentTime = this.audio.currentTime;
   }
 
   next() {

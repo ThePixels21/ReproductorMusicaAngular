@@ -48,6 +48,6 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSliderModule
   ],
   providers: [],
-  bootstrap: [AppComponent, RegistroComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
