@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,11 @@ export class LoginComponent {
 
   formLogin!: FormGroup
 
-  constructor(private fb: FormBuilder){}
+  constructor(
+    private fb: FormBuilder, 
+    private loginService: LoginService,
+    private router: Router
+    ){}
 
   ngOnInit(){
     this.formLogin = this.iniciarFormulario()
@@ -23,7 +29,12 @@ export class LoginComponent {
     })
   }
 
-  iniciarSesion() {
-    console.log("Correo: "+this.formLogin.get('correo')?.value+", contraseña: "+this.formLogin.get('contrasenia')?.value);
+  login() {
+    this.loginService.login(this.formLogin.value.correo, this.formLogin.value.contrasenia)
+    .then(res => {
+      console.log(res)
+      this.router.navigate([''])
+    })
+    .catch(err => console.log(err))
   }
 }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { RegistroService } from './registro.service';
+import { Router } from '@angular/router';
+import { SwalUtils } from '../utils/swal-utils';
 
 @Component({
   selector: 'app-registro',
@@ -10,7 +13,11 @@ export class RegistroComponent {
 
   formUsuario!: FormGroup
 
-  constructor(private fb: FormBuilder){}
+  constructor(
+    private fb: FormBuilder, 
+    private registroService: RegistroService,
+    private router: Router
+    ){}
 
   ngOnInit(){
     this.formUsuario = this.inicializarFormulario()
@@ -29,6 +36,11 @@ export class RegistroComponent {
   }
 
   registrarse() {
-    console.log("Usuario: nombre: "+this.formUsuario.get('nombre')?.value+", apellido: "+this.formUsuario.get('apellido')?.value+", nickname: "+this.formUsuario.get('nickname')?.value+", edad: "+this.formUsuario.get('edad')?.value+", correo: "+this.formUsuario.get('correo')?.value+", contraseña:"+this.formUsuario.get('contrasenia')?.value);
+    this.registroService.registerAccount(this.formUsuario.value.correo, this.formUsuario.value.contrasenia)
+    .then(res => {
+      console.log(res)
+      this.router.navigate(['/login'])
+      SwalUtils.customMessageOk('Welcome', 'Successful registration')})
+    .catch(err => console.log(err))
   }
 }

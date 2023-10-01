@@ -21,6 +21,11 @@ import { ItemsModule } from './items/items.module';
 import { InicioModule } from './inicio/inicio.module';
 import { ArtistsModule } from './artists/artists.module';
 import { PlaylistsModule } from './playlists/playlists.module';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,11 @@ import { PlaylistsModule } from './playlists/playlists.module';
     MatIconModule,
     MatTableModule,
     MatButtonModule,
-    MatSliderModule
+    MatSliderModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]
