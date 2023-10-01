@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +8,20 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class LoginComponent {
 
-  formLogin = new FormGroup({
-    'correo': new FormControl(''),
-    'contrasenia': new FormControl('')
-  })
+  formLogin!: FormGroup
+
+  constructor(private fb: FormBuilder){}
+
+  ngOnInit(){
+    this.formLogin = this.iniciarFormulario()
+  }
+
+  iniciarFormulario(): FormGroup {
+    return this.fb.group({
+      correo: [''],
+      contrasenia: ['']
+    })
+  }
 
   iniciarSesion() {
     console.log("Correo: "+this.formLogin.get('correo')?.value+", contraseña: "+this.formLogin.get('contrasenia')?.value);
