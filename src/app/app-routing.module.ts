@@ -31,6 +31,17 @@ const routes: Routes = [
   {
     path: 'artists',
     component: ArtistsComponent
+  },
+  {
+    path: 'profile',
+    children: [
+      {
+        path: '', redirectTo: `/profile/my-profile/nickname/${sessionStorage.getItem('nickname')}`, pathMatch: 'full'
+      },
+      {
+        path: 'my-profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+      }
+    ]
   }
 ];
 
