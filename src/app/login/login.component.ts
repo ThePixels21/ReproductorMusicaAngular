@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SwalUtils } from '../utils/swal-utils';
 
 @Component({
   selector: 'app-login',
@@ -24,17 +25,24 @@ export class LoginComponent {
 
   iniciarFormulario(): FormGroup {
     return this.fb.group({
-      correo: [''],
-      contrasenia: ['']
+      correo: ['', [Validators.required, Validators.email]],
+      contrasenia: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 
   login() {
-    this.loginService.login(this.formLogin.value.correo, this.formLogin.value.contrasenia)
-    .then(res => {
-      console.log(res)
-      this.router.navigate([''])
-    })
-    .catch(err => console.log(err))
+    if(this.formLogin.valid){
+      this.loginService.login(this.formLogin.value.correo, this.formLogin.value.contrasenia)
+      .then(res => {
+        console.log(res)
+        this.router.navigate([''])
+        SwalUtils.customMessageOk('Welcome', 'Login Successful')
+      })
+      .catch(
+        err => {
+          console.log(err)
+          SwalUtils.customMessageError('Error', 'Verify your credentials')
+        })
+    }
   }
 }

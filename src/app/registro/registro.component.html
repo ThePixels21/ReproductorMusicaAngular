@@ -8,30 +8,55 @@
                 <div class="mb-3">
                     <label class="form-label text-white">Name</label>
                     <input formControlName="nombre" type="text" class="form-control" placeholder="Enter your name">
+                    <div *ngIf="formUsuario.get('nombre')?.touched && formUsuario.get('nombre')?.errors?.['required']"
+                        class="alert alert-danger mt-2" role="alert">Name is required</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white">Surname</label>
                     <input formControlName="apellido" type="text" class="form-control" placeholder="Enter your surname">
+                    <div *ngIf="formUsuario.get('apellido')?.touched && formUsuario.get('apellido')?.errors?.['required']"
+                        class="alert alert-danger mt-2" role="alert">Surname is required</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white">Nickname</label>
-                    <input formControlName="nickname" type="text" class="form-control" placeholder="Enter your nickname">
+                    <input formControlName="nickname" type="text" class="form-control"
+                        placeholder="Enter your nickname">
+                    <div *ngIf="formUsuario.get('nickname')?.touched && formUsuario.get('nickname')?.errors?.['required']"
+                        class="alert alert-danger mt-2" role="alert">Nickname is required</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white">Age</label>
                     <input formControlName="edad" type="number" class="form-control" placeholder="Type your age">
+                    <div *ngIf="formUsuario.get('edad')?.touched && formUsuario.get('edad')?.errors?.['required']"
+                        class="alert alert-danger mt-2" role="alert">Age is required</div>
+                    <div *ngIf="formUsuario.get('edad')?.touched && !formUsuario.get('edad')?.errors?.['required'] && formUsuario.get('edad')?.value > 120 || formUsuario.get('edad')?.touched && formUsuario.get('edad')?.value < 5 && !formUsuario.get('edad')?.errors?.['required']"
+                        class="alert alert-danger mt-2" role="alert">Age is invalid</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white">Email</label>
                     <input formControlName="correo" type="email" class="form-control" placeholder="Enter your email">
+                    <div *ngIf="formUsuario.get('correo')?.touched && formUsuario.get('correo')?.errors?.['required']"
+                        class="alert alert-danger mt-2" role="alert">Email is required</div>
+                    <div *ngIf="formUsuario.get('correo')?.touched && !formUsuario.get('correo')?.errors?.['required'] && formUsuario.get('correo')?.errors?.['email']"
+                        class="alert alert-danger mt-2" role="alert">Email is invalid</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white">Password</label>
-                    <input formControlName="contrasenia" type="password" class="form-control" placeholder="Enter your password">
+                    <input formControlName="contrasenia" type="password" class="form-control"
+                        placeholder="Enter your password">
+                    <div *ngIf="formUsuario.get('contrasenia')?.touched && formUsuario.get('contrasenia')?.errors?.['required']"
+                        class="alert alert-danger mt-2" role="alert">Password is required</div>
+                    <div *ngIf="formUsuario.get('contrasenia')?.touched && !formUsuario.get('contrasenia')?.errors?.['required'] && formUsuario.get('contrasenia')?.errors?.['minlength']"
+                        class="alert alert-danger mt-2" role="alert">Minimun 6 characters</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white">Confirm password</label>
-                    <input formControlName="repContrasenia" type="password" class="form-control" placeholder="Enter your password again">
+                    <input formControlName="repContrasenia" type="password" class="form-control"
+                        placeholder="Enter your password again">
+                    <div *ngIf="formUsuario.get('repContrasenia')?.touched && formUsuario.get('repContrasenia')?.errors?.['required']"
+                        class="alert alert-danger mt-2" role="alert">Password is required</div>
+                    <div *ngIf="formUsuario.get('repContrasenia')?.touched && !formUsuario.get('repContrasenia')?.errors?.['required'] && formUsuario.get('repContrasenia')?.value != formUsuario.get('contrasenia')?.value"
+                        class="alert alert-danger mt-2" role="alert">Password does not match</div>
                 </div>
                 <div class="boton text-center mb-4 d-grid gap-2 col-3 mx-auto">
                     <button type="submit" class="btn btn-success pe-3 ps-3 rounded-pill">Sign up</button>
