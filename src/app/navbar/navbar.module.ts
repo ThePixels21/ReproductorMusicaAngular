@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NavbarRoutingModule } from './navbar-routing.module';
 import { NavbarComponent } from './navbar.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { NavbarComponent } from './navbar.component';
   ],
   imports: [
     CommonModule,
-    NavbarRoutingModule
+    NavbarRoutingModule,
+    FormsModule
   ],
   exports: [
     NavbarComponent

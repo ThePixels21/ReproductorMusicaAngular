@@ -11,10 +11,12 @@
                     <a class="nav-link" [ngClass]="activeComponent == 'home' ? 'active' : ''" routerLink="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="activeComponent == 'playlists' ? 'active' : ''" routerLink="/playlists">Playlists</a>
+                    <a class="nav-link" [ngClass]="activeComponent == 'playlists' ? 'active' : ''"
+                        routerLink="/playlists">Playlists</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="activeComponent == 'artists' ? 'active' : ''" routerLink="/artists">Artists</a>
+                    <a class="nav-link" [ngClass]="activeComponent == 'artists' ? 'active' : ''"
+                        routerLink="/artists">Artists</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
@@ -25,7 +27,14 @@
                     <a class="nav-link" routerLink="/login">Sign in</a>
                 </li>
                 <li class="nav-item" *ngIf="activeSesion">
-                    <a class="nav-link" routerLink="/account">Account</a>
+                    <div class="dropdown">
+                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Account</button>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                            <li><a class="dropdown-item">My account</a></li>
+                            <li><a class="dropdown-item" (click)="logout()">Log out</a></li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
