@@ -5,6 +5,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { ArtistsComponent } from './artists/artists.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ItemsComponent } from './items/items.component';
 
 const routes: Routes = [
   {
@@ -13,8 +15,19 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    component: InicioComponent
+    path: '',
+    component: InicioComponent,
+    children: [
+      {
+        path: 'home', component: ItemsComponent
+      },
+      {
+        path: 'playlists', component: PlaylistsComponent
+      },
+      {
+        path: 'artists', component: ArtistsComponent
+      }
+    ]
   },
   {
     path: 'register',
@@ -25,23 +38,8 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'playlists',
-    component: PlaylistsComponent
-  },
-  {
-    path: 'artists',
-    component: ArtistsComponent
-  },
-  {
     path: 'profile',
-    children: [
-      {
-        path: '', redirectTo: `/profile/my-profile/nickname/${sessionStorage.getItem('nickname')}`, pathMatch: 'full'
-      },
-      {
-        path: 'my-profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
-      }
-    ]
+    component: ProfileComponent
   }
 ];
 

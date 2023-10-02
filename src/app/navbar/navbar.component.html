@@ -8,15 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="activeComponent == 'home' ? 'active' : ''" routerLink="/">Home</a>
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="activeComponent == 'playlists' ? 'active' : ''"
-                        routerLink="/playlists">Playlists</a>
+                    <a class="nav-link" routerLink="/playlists" routerLinkActive="active">Playlists</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [ngClass]="activeComponent == 'artists' ? 'active' : ''"
-                        routerLink="/artists">Artists</a>
+                    <a class="nav-link" routerLink="/artists" routerLinkActive="active">Artists</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
@@ -28,10 +26,10 @@
                 </li>
                 <li class="nav-item" *ngIf="activeSesion">
                     <div class="dropdown">
-                        <button class="btn btn-dark dropdown-toggle pointer-on-menu" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Profile</button>
+                        <button class="btn btn-dark dropdown-toggle pointer-on-menu" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Profile</button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                            <li><a class="dropdown-item pointer-on-menu" routerLink="/profile">My profile</a></li>
+                            <li><a class="dropdown-item pointer-on-menu" (click)="onProfile()">My profile</a></li>
                             <li><a class="dropdown-item pointer-on-menu" (click)="logout()">Log out</a></li>
                         </ul>
                     </div>

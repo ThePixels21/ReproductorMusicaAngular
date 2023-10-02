@@ -1,13 +1,13 @@
 <div class="container-fluid no-padding">
 
-  <app-navbar [activeComponent]="'home'"></app-navbar>
+  <app-navbar></app-navbar>
 
   <div class="mt-3 mb-3">
     <app-barra-busqueda></app-barra-busqueda>
   </div>
 
   <div class="footer-space">
-    <app-items></app-items>
+    <router-outlet></router-outlet>
   </div>
 
 </div>

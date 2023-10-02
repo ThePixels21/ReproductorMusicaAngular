@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { LoginService } from '../login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,18 +11,17 @@ export class NavbarComponent {
 
   activeSesion: boolean = false
 
-  constructor(private loginService: LoginService){
+  constructor(private loginService: LoginService, private router: Router){
     this.loginService.userState().subscribe(res => {
       if(res){
+        console.log(res.uid)
         this.activeSesion = true
+        sessionStorage.setItem('uid', res.uid)
       }else{
         this.activeSesion = false
       }
     })
   }
-
-
-  @Input() activeComponent: string = ''
 
   logout(){
     this.loginService.logout()
@@ -29,6 +29,10 @@ export class NavbarComponent {
       console.log("Logout successful")
     })
     .catch(error => console.log(error))
+  }
+
+  onProfile(){
+    this.router.navigate(['/profile'])
   }
 
 }
