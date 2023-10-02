@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { IMusic } from '../items/IMusic';
-import * as moment from 'moment';
+import { IMusic } from '../models/IMusic';
 
 @Component({
   selector: 'app-panel-control',

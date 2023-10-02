@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { IMusic } from './IMusic';
+import { IMusic } from '../models/IMusic';
 import * as moment from 'moment';
 
 @Component({

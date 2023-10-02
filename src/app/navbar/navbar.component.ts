@@ -32,7 +32,7 @@ export class NavbarComponent {
   }
 
   onProfile(){
-    this.router.navigate(['/profile'])
+    this.router.navigate(['/profile', sessionStorage.getItem('uid')])
   }
 
 }
