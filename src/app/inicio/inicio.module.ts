@@ -5,6 +5,7 @@ import { InicioRoutingModule } from './inicio-routing.module';
 import { InicioComponent } from './inicio.component';
 import { NavbarModule } from '../navbar/navbar.module';
 import { BarraBusquedaModule } from '../barra-busqueda/barra-busqueda.module';
+import { PanelControlModule } from '../panel-control/panel-control.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { BarraBusquedaModule } from '../barra-busqueda/barra-busqueda.module';
     CommonModule,
     InicioRoutingModule,
     NavbarModule,
-    BarraBusquedaModule
+    BarraBusquedaModule,
+    PanelControlModule
   ],
   exports: [
     InicioComponent

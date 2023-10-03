@@ -16,8 +16,8 @@
             [ngClass]="i == currentSongIndex ? 'active':''">
             <div class="row align-items-center">
                 <div class="col-6"><a (click)="play(i)" class="title"
-                        [ngClass]="i == currentSongIndex ? '':'title h'">{{song.title}}</a></div>
-                <div class="col-5">{{song.artist}}</div>
+                        [ngClass]="i == currentSongIndex ? '':'h'">{{song.title}}</a></div>
+                <div class="col-5"><a class="artist">{{song.artist}}</a></div>
                 <div class="col-1 text-end">
                     <div class="btn-group dropstart">
                         <a class="menu-btn" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,11 +39,4 @@
             </div>
         </li>
     </ul>
-</div>
-
-<div>
-    <app-panel-control [musicList]="musicList" [musicLength]="musicLength" [duration]="duration"
-        [currentTime]="currentTime" [(pausado)]="pausado" [(currentSong)]="currentSong"
-        [(currentSongIndex)]="currentSongIndex" [(audio)]="audio">
-    </app-panel-control>
 </div>

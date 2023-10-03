@@ -21,7 +21,7 @@
                         {{currentTime}}&nbsp;/&nbsp;{{musicLength}}
                     </div>
                     <div>
-                        <mat-slider (change)="adjustDuration()" class="slider-full duration" color="primary" min="0" max="{{duration}}"><input matSliderThumb [(ngModel)]="audio.currentTime"></mat-slider>
+                        <mat-slider class="slider-full duration" color="primary" min="0" max="{{duration}}"><input matSliderThumb [(ngModel)]="audio.currentTime"></mat-slider>
                     </div>
                 </div>
             </div>

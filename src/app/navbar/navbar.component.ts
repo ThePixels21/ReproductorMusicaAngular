@@ -14,7 +14,6 @@ export class NavbarComponent {
   constructor(private loginService: LoginService, private router: Router){
     this.loginService.userState().subscribe(res => {
       if(res){
-        console.log(res.uid)
         this.activeSesion = true
         sessionStorage.setItem('uid', res.uid)
       }else{
