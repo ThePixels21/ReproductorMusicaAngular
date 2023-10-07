@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegistroComponent {
 
   formUsuario!: FormGroup
+  nickNameUsed = false
 
   constructor(
     private fb: FormBuilder, 
@@ -36,7 +37,7 @@ export class RegistroComponent {
     })
   }
 
-  registrarse() {
+  async registrarse() {
     if(this.formUsuario.valid){
       var name = this.formUsuario.value.nombre
       var surname = this.formUsuario.value.apellido
@@ -55,23 +56,28 @@ export class RegistroComponent {
           age: age,
           email: email
         }
-    
-        this.registroService.registerAccount(email, pass)
-        .then(res => {
-          console.log(res)
-          const uid = res.user.uid
-          user.uid = uid
-          this.registroService.saveUser(user)
+
+        if(await this.registroService.isNicknameUnique(nickname)){
+          this.nickNameUsed = false
+          this.registroService.registerAccount(email, pass)
           .then(res => {
-            this.router.navigate(['/login'])
-            SwalUtils.customMessageOk('Welcome', 'Successful registration')
-          }).catch(err => {
+            console.log(res)
+            const uid = res.user.uid
+            user.uid = uid
+            this.registroService.saveUser(user)
+            .then(res => {
+              this.router.navigate(['/login'])
+              SwalUtils.customMessageOk('Welcome', 'Successful registration')
+            }).catch(err => {
+              console.log(err)
+            })
+          })
+          .catch(err => {
             console.log(err)
           })
-        })
-        .catch(err => {
-          console.log(err)
-        })
+        } else {
+          this.nickNameUsed = true
+        }
       }
     }
   }
