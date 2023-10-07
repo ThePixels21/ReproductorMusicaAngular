@@ -7,6 +7,7 @@ import { PlaylistsComponent } from './playlists/playlists.component';
 import { ArtistsComponent } from './artists/artists.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ItemsComponent } from './items/items.component';
+import { UploadSongComponent } from './upload-song/upload-song.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'upload',
+    component: UploadSongComponent
   },
   {
     path: 'profile/:uid',

@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { IMusic } from '../models/IMusic';
+import { ISong } from '../models/ISong';
 import { SongService } from '../inicio/song.service';
 
 @Component({
@@ -30,13 +30,13 @@ export class PanelControlComponent {
 
   audio = new Audio();
 
-  currentSong: IMusic = {
+  currentSong: ISong = {
     title: '',
     artist: '',
     url: ''
   };
 
-  musicList: IMusic[] = [];
+  musicList: ISong[] = [];
 
   constructor(private songs: SongService){
 

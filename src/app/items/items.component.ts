@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IMusic } from '../models/IMusic';
+import { ISong } from '../models/ISong';
 import * as moment from 'moment';
 import { SongService } from '../inicio/song.service';
 
@@ -23,7 +23,7 @@ export class ItemsComponent {
   musicLength: string = '0:00';
   duration: number = 1;
   currentTime: string = '0:00';
-  musicList: IMusic[] = []
+  musicList: ISong[] = []
 
   constructor(private songs: SongService) {
 

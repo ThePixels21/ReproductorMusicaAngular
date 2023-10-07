@@ -31,12 +31,17 @@ import { ArtistsModule } from './artists/artists.module';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileModule } from './profile/profile.module';
+import { UploadSongModule } from './upload-song/upload-song.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     RegistroModule,
     LoginModule,
     NavbarModule,
@@ -47,6 +52,7 @@ import { ProfileModule } from './profile/profile.module';
     ArtistsModule,
     PlaylistsModule,
     ProfileModule,
+    UploadSongModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -56,11 +62,7 @@ import { ProfileModule } from './profile/profile.module';
     MatIconModule,
     MatTableModule,
     MatButtonModule,
-    MatSliderModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

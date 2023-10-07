@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IMusic } from '../models/IMusic';
+import { ISong } from '../models/ISong';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class SongService {
 
   constructor() { }
 
-  private songs: IMusic[] = [
+  private songs: ISong[] = [
     {
       id: 1,
       title: 'Wait For Us To Collide',
@@ -114,7 +114,7 @@ export class SongService {
     }
   ];
 
-  private current: IMusic = {
+  private current: ISong = {
     title: 'No song',
     artist: '',
     url: ''

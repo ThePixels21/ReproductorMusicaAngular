@@ -1,0 +1,5 @@
+<form [formGroup]="songForm" (ngSubmit)="uploadSong()">
+    <input type="text" formControlName="name" placeholder="Nombre de la canción">
+    <input type="file" accept="audio/*" (change)="onFileChange($event)">
+    <button type="submit">Subir canción</button>
+</form>
