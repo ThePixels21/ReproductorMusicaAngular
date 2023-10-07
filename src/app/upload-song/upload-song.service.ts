@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, collection } from '@angular/fire/firestore';
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { environment } from 'src/environments/environment';
@@ -28,7 +28,10 @@ export class UploadSongService {
 
   saveSong(song: ISong){
     const songRef = collection(this.firestore, 'songs')
-    return addDoc(songRef, song)
+    const docRef = doc(songRef)
+    const id = docRef.id
+    song.id = id
+    return setDoc(docRef, song)
   }
 
   getDownloadUrl(songRef: any){
