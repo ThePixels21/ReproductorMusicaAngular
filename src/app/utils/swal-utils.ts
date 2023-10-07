@@ -16,4 +16,13 @@ export class SwalUtils{
             text: text
         })
     }
+
+    static loadingMessage(title: string){
+        Swal.fire({
+            title: title,
+            didOpen: () => {
+                Swal.showLoading()
+            }
+        })
+    }
 }

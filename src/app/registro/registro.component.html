@@ -24,7 +24,7 @@
                     <div *ngIf="formUsuario.get('nickname')?.touched && formUsuario.get('nickname')?.errors?.['required']"
                         class="alert alert-danger mt-2" role="alert">Nickname is required</div>
                     <div *ngIf="nickNameUsed"
-                        class="alert alert-danger mt-2" role="alert">Nickname is in use</div>
+                        class="alert alert-danger mt-2" role="alert">Nickname already in use</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white">Age</label>
@@ -39,8 +39,10 @@
                     <input formControlName="correo" type="email" class="form-control" placeholder="Enter your email">
                     <div *ngIf="formUsuario.get('correo')?.touched && formUsuario.get('correo')?.errors?.['required']"
                         class="alert alert-danger mt-2" role="alert">Email is required</div>
-                    <div *ngIf="formUsuario.get('correo')?.touched && !formUsuario.get('correo')?.errors?.['required'] && formUsuario.get('correo')?.errors?.['email']"
+                    <div *ngIf="formUsuario.get('correo')?.touched && !formUsuario.get('correo')?.errors?.['required'] && formUsuario.get('correo')?.errors?.['email'] || invalidEmail"
                         class="alert alert-danger mt-2" role="alert">Email is invalid</div>
+                    <div *ngIf="emailUsed"
+                        class="alert alert-danger mt-2" role="alert">Email already in use</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label text-white">Password</label>

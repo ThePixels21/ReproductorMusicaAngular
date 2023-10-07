@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { UploadSongService } from './upload-song.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ISong } from '../models/ISong';
+import { SwalUtils } from '../utils/swal-utils';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-upload-song',
@@ -39,16 +41,21 @@ export class UploadSongComponent {
       const file: File = this.songForm.get('file')!!.value
       console.log(file)
       if(file.type.startsWith('audio/')){
+        SwalUtils.loadingMessage('Uploading...')
         try {
           const res = await this.uploadSongService.uploadSong(file);
           const url = await this.uploadSongService.getDownloadUrl(res.ref);
           song.url = url;
           const result = await this.uploadSongService.saveSong(song);
           console.log(`Uploaded successful---------\n${result}`);
+          Swal.close()
+          SwalUtils.customMessageOk('Uploaded', 'Song uploaded succesfully')
         } catch (err) {
           console.log(`Error uploading song----------\n${err}`);
+          SwalUtils.customMessageError('Error uploading', 'Contact support')
         }
       }else {
+        SwalUtils.customMessageError('Error', 'Audio files only')
         console.log('Only supported songs')
       }
     } else {

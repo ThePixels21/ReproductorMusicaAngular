@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SwalUtils } from '../utils/swal-utils';
 import IUser from '../models/IUser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -14,6 +15,8 @@ export class RegistroComponent {
 
   formUsuario!: FormGroup
   nickNameUsed = false
+  emailUsed = false
+  invalidEmail = false
 
   constructor(
     private fb: FormBuilder, 
@@ -48,6 +51,7 @@ export class RegistroComponent {
       var cpass = this.formUsuario.value.repContrasenia
 
       if(pass == cpass && age > 4 && age < 121){
+        SwalUtils.loadingMessage('Registering...')
         var user: IUser = {
           uid: '',
           name: name,
@@ -61,22 +65,35 @@ export class RegistroComponent {
           this.nickNameUsed = false
           this.registroService.registerAccount(email, pass)
           .then(res => {
+            this.emailUsed = false
+            this.invalidEmail = false
             console.log(res)
             const uid = res.user.uid
             user.uid = uid
             this.registroService.saveUser(user)
             .then(res => {
+              Swal.close()
               this.router.navigate(['/login'])
               SwalUtils.customMessageOk('Welcome', 'Successful registration')
             }).catch(err => {
               console.log(err)
+              Swal.close()
             })
           })
           .catch(err => {
             console.log(err)
+            Swal.close()
+            if (err.code === 'auth/email-already-in-use') {
+              this.emailUsed = true
+            } else if (err.code === 'auth/invalid-email') {
+              this.invalidEmail = true
+            } else {
+              SwalUtils.customMessageError('Error', 'Error registering account')
+            }
           })
         } else {
           this.nickNameUsed = true
+          Swal.close()
         }
       }
     }
