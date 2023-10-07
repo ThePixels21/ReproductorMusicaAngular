@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UploadSongService } from './upload-song.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ISong } from '../models/ISong';
 
 @Component({
   selector: 'app-upload-song',
@@ -22,25 +23,36 @@ export class UploadSongComponent {
   
   initializeForm(){
     return this.fb.group({
-      name: ['', [Validators.required]],
+      title: ['', [Validators.required]],
       file: [null, [Validators.required]]
     })
   }
 
-  uploadSong(){
+  async uploadSong(){
     if(this.songForm.valid && this.songForm.get('file')!!.value != null){
-      console.log(this.songForm.get('file')!!.value)
+      var song: ISong = {
+        userId: sessionStorage.getItem('uid')!!,
+        title: this.songForm.value.title,
+        artist: sessionStorage.getItem('nickname')!!,
+        url: ''
+      }
       const file: File = this.songForm.get('file')!!.value
       console.log(file)
       if(file.type.startsWith('audio/')){
-        this.uploadSongService.uploadSong(file)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        try {
+          const res = await this.uploadSongService.uploadSong(file);
+          const url = await this.uploadSongService.getDownloadUrl(res.ref);
+          song.url = url;
+          const result = await this.uploadSongService.saveSong(song);
+          console.log(`Uploaded successful---------\n${result}`);
+        } catch (err) {
+          console.log(`Error uploading song----------\n${err}`);
+        }
       }else {
         console.log('Only supported songs')
       }
     } else {
-      console.log('Nó válido')
+      console.log('Form is not valid')
     }
   }
 
