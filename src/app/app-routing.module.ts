@@ -4,10 +4,11 @@ import { RegistroComponent } from './registro/registro.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
-import { ArtistsComponent } from './artists/artists.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ArtistsComponent } from './artists/artists/artists.component';
 import { ItemsComponent } from './items/items.component';
 import { UploadSongComponent } from './upload-song/upload-song.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { ProfileComponent } from './artists/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -20,13 +21,20 @@ const routes: Routes = [
     component: InicioComponent,
     children: [
       {
-        path: 'home', component: ItemsComponent
+        path: 'home', 
+        component: ItemsComponent
       },
       {
-        path: 'playlists', component: PlaylistsComponent
+        path: 'playlists', 
+        component: PlaylistsComponent
       },
       {
-        path: 'artists', component: ArtistsComponent
+        path: 'artists', 
+        component: ArtistsComponent
+      },
+      {
+        path: 'artists/profile/:nickname',
+        component: ProfileComponent
       }
     ]
   },
@@ -43,8 +51,8 @@ const routes: Routes = [
     component: UploadSongComponent
   },
   {
-    path: 'profile/:uid',
-    component: ProfileComponent
+    path: 'my-profile/:nickname',
+    component: MyProfileComponent
   }
 ];
 

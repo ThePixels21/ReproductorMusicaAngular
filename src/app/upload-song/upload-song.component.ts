@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 export class UploadSongComponent {
 
   songForm!: FormGroup
+  fileTouched = false
+  titleTouched = false
 
   constructor(
     private uploadSongService: UploadSongService, 
@@ -59,14 +61,19 @@ export class UploadSongComponent {
         console.log('Only supported songs')
       }
     } else {
+      this.fileTouched = true
+      this.titleTouched = true
       console.log('Form is not valid')
     }
   }
 
   onFileChange(event: any) {
+    this.fileTouched = true
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.songForm.get('file')!!.setValue(file);
+    }else {
+      this.songForm.get('file')!!.setValue(null);
     }
   }
 

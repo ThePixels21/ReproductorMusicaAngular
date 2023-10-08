@@ -20,7 +20,6 @@ export class AppComponent {
   }
 
   saveUserData(id: string){
-    console.log('ENTRÓ----------')
     sessionStorage.setItem('uid', id)
     this.loginService.getUserById(id)
     .then(res => {

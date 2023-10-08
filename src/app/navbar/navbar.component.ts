@@ -15,7 +15,6 @@ export class NavbarComponent {
     this.loginService.userState().subscribe(res => {
       if(res){
         this.activeSesion = true
-        sessionStorage.setItem('uid', res.uid)
       }else{
         this.activeSesion = false
       }
@@ -31,7 +30,7 @@ export class NavbarComponent {
   }
 
   onProfile(){
-    this.router.navigate(['/profile', sessionStorage.getItem('uid')])
+    this.router.navigate(['/my-profile', sessionStorage.getItem('nickname')])
   }
 
 }

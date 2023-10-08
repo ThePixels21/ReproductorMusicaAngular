@@ -30,12 +30,13 @@ import { InicioModule } from './inicio/inicio.module';
 import { ArtistsModule } from './artists/artists.module';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProfileModule } from './profile/profile.module';
 import { UploadSongModule } from './upload-song/upload-song.module';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MyProfileComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -51,7 +52,6 @@ import { UploadSongModule } from './upload-song/upload-song.module';
     InicioModule,
     ArtistsModule,
     PlaylistsModule,
-    ProfileModule,
     UploadSongModule,
     BrowserModule,
     AppRoutingModule,
