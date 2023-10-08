@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ItemsRoutingModule } from './items-routing.module';
 import { ItemsComponent } from './items.component';
 import { PanelControlModule } from '../panel-control/panel-control.module';
+import { BarraBusquedaModule } from '../barra-busqueda/barra-busqueda.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { PanelControlModule } from '../panel-control/panel-control.module';
   imports: [
     CommonModule,
     ItemsRoutingModule,
-    PanelControlModule
+    PanelControlModule,
+    BarraBusquedaModule
   ],
   exports: [
     ItemsComponent

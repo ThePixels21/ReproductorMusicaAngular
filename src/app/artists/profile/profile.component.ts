@@ -55,12 +55,6 @@ export class ProfileComponent {
       this.nickname = params['nickname']
       this.loadItems()
     })
-
-    if (this.currentPlaylist != this.songs) {
-      this.playing = false
-    } else {
-      this.playing = true
-    }
   }
 
   loadItems() {
@@ -68,12 +62,19 @@ export class ProfileComponent {
       .then(snap => {
         this.songs = snap.docs.map(doc => doc.data() as ISong)
         console.log(this.songs)
+        if (this.currentPlaylist.join() != this.songs.join()) {
+          this.playing = false
+        } else {
+          if(!this.paused){
+            this.playing = true
+          }
+        }
       })
       .catch(err => console.log(err))
   }
 
   play(index: number) {
-    if (this.currentPlaylist != this.songs) {
+    if (this.currentPlaylist.join() != this.songs.join()) {
       this.songService.setCurrentPlaylist(this.songs)
       this.playing = true
     }

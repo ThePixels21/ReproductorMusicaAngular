@@ -101,7 +101,9 @@ export class ItemsComponent {
     if (this.currentPlaylist != this.musicList) {
       this.playing = false
     } else {
-      this.playing = true
+      if(!this.pausado){
+        this.playing = true
+      }
     }
   }
 
