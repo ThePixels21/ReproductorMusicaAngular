@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ArtistsService } from '../artists.service';
 import { ActivatedRoute } from '@angular/router';
 import { ISong } from 'src/app/models/ISong';
+import { SongService } from 'src/app/inicio/song.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,30 +11,81 @@ import { ISong } from 'src/app/models/ISong';
 })
 export class ProfileComponent {
 
+  icLinesSuccess = '../../assets/icon/more_horizontal_lines.svg';
+  icLinesWhite = '../../assets/icon/more_horizontal_lines_white.svg';
+  icPause = '../../assets/icon/pause.svg';
+  icPlay = '../../assets/icon/play.svg';
+
+  playing = false
+
+  paused = true
+
   nickname: string = ""
   songs!: ISong[]
+  currentPlaylist!: ISong[]
+  currentSongId: string = ""
 
   constructor(
     private artistsService: ArtistsService,
-    private activatedRoute: ActivatedRoute
-    ){}
+    private activatedRoute: ActivatedRoute,
+    private songService: SongService
+  ) {
+    this.songService.getCurrentSongId().subscribe(index => {
+      this.currentSongId = index
+    })
 
-  ngOnInit(){
+    this.songService.getCurrentPlaylist().subscribe(songs => {
+      this.currentPlaylist = songs
+    })
+
+    this.songService.isPaused().subscribe(paused => {
+      this.paused = paused
+      if (this.paused == true) {
+        this.playing = false
+      } else {
+        if (this.currentPlaylist == this.songs) {
+          this.playing = true
+        }
+      }
+    })
+  }
+
+  ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.nickname = params['nickname']
       this.loadItems()
     })
+
+    if (this.currentPlaylist != this.songs) {
+      this.playing = false
+    } else {
+      this.playing = true
+    }
   }
 
-  loadItems(){
+  loadItems() {
     this.artistsService.getSongsByNickname(this.nickname)
-    .then(snap => {
-      this.songs = snap.docs.map(doc => doc.data() as ISong)
-      console.log(this.songs)
-    })
-    .catch(err => console.log(err))
+      .then(snap => {
+        this.songs = snap.docs.map(doc => doc.data() as ISong)
+        console.log(this.songs)
+      })
+      .catch(err => console.log(err))
   }
 
-  play(){}
+  play(index: number) {
+    if (this.currentPlaylist != this.songs) {
+      this.songService.setCurrentPlaylist(this.songs)
+      this.playing = true
+    }
+    this.songService.setCurrentSongIndex(index)
+    this.songService.setCurrentSongId(this.songs[index].id!!)
+    this.songService.setCurrentSong(this.songs[index])
+    this.songService.setAudioUrlAndPlay(this.songs[index].url)
+  }
+
+  pause() {
+    this.songService.pauseAudio()
+    this.songService.setPaused(true)
+  }
 
 }

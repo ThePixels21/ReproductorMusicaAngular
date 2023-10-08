@@ -17,6 +17,10 @@ a.menu-btn {
     cursor: pointer;
 }
 
+img.play{
+    cursor:pointer
+}
+
 .active {
     background-color: #198754;
     border-color: #198754;

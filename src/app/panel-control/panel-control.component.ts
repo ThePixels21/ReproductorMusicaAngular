@@ -72,7 +72,7 @@ export class PanelControlComponent {
       this.pausado = paused
     })
 
-    this.songs.getMusicList().subscribe(songs => {
+    this.songs.getCurrentPlaylist().subscribe(songs => {
       this.musicList = songs
     })
 
@@ -82,6 +82,7 @@ export class PanelControlComponent {
     if (this.audio.paused) {
       if (this.audio.readyState === 0) {
         this.songs.setCurrentSongIndex(0)
+        this.songs.setCurrentSongId(this.musicList[0].id!!)
         this.songs.setCurrentSong(this.musicList[0])
         this.songs.setAudioUrl(this.currentSong.url)
       }
@@ -100,10 +101,12 @@ export class PanelControlComponent {
   next() {
     if (this.currentSongIndex != this.musicList.length - 1) {
       this.songs.setCurrentSongIndex(this.currentSongIndex + 1)
+      this.songs.setCurrentSongId(this.musicList[this.currentSongIndex].id!!)
       this.songs.setCurrentSong(this.musicList[this.currentSongIndex])
       this.songs.setAudioUrlAndPlay(this.currentSong.url)
     } else {
       this.songs.setCurrentSongIndex(0)
+      this.songs.setCurrentSongId(this.musicList[this.currentSongIndex].id!!)
       this.songs.setCurrentSong(this.musicList[this.currentSongIndex])
       this.songs.setAudioUrlAndPlay(this.currentSong.url)
     }
@@ -112,11 +115,13 @@ export class PanelControlComponent {
   previous() {
     if (this.currentSongIndex != 0) {
       this.songs.setCurrentSongIndex(this.currentSongIndex - 1)
+      this.songs.setCurrentSongId(this.musicList[this.currentSongIndex].id!!)
       this.songs.setCurrentSong(this.musicList[this.currentSongIndex])
       this.songs.setAudioUrlAndPlay(this.currentSong.url)
     } else {
       this.songs.setCurrentSongIndex(this.musicList.length - 1)
       this.currentSong = this.musicList[this.currentSongIndex]
+      this.songs.setCurrentSongId(this.musicList[this.currentSongIndex].id!!)
       this.songs.setCurrentSong(this.musicList[this.currentSongIndex])
       this.songs.setAudioUrlAndPlay(this.currentSong.url)
     }
