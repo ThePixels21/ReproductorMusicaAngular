@@ -9,6 +9,7 @@ import { ItemsComponent } from './items/items.component';
 import { UploadSongComponent } from './upload-song/upload-song.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ProfileComponent } from './artists/profile/profile.component';
+import { SearchResultsComponent } from './barra-busqueda/search-results/search-results.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'home', 
         component: ItemsComponent
+      },
+      {
+        path: 'home/search/:keyword',
+        component: SearchResultsComponent
       },
       {
         path: 'playlists', 

@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BarraBusquedaRoutingModule } from './barra-busqueda-routing.module';
-import { BarraBusquedaComponent } from './barra-busqueda.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BarraBusquedaComponent } from './barra-busqueda/barra-busqueda.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 
 @NgModule({
   declarations: [
-    BarraBusquedaComponent
+    BarraBusquedaComponent,
+    SearchResultsComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule
   ],
   exports: [
-    BarraBusquedaComponent
+    BarraBusquedaComponent,
+    SearchResultsComponent
   ]
 })
 export class BarraBusquedaModule { }

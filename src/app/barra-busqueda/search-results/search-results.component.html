@@ -1,0 +1,43 @@
+<div class="contenedor">
+    <div class="row">
+        <div class="col-11 text-white">
+            <h1>Results</h1>
+        </div>
+    </div>
+    <ul class="list-group pb-2">
+        <li class="list-group-item pb-0 pt-0">
+            <div class="row">
+                <div class="col-6 mt-2">
+                    <h6>Name</h6>
+                </div>
+                <div class="col-5 mt-2">
+                    <h6>Artist</h6>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ul class="list-group">
+        <li *ngFor="let song of songs" class="list-group-item" [ngClass]="currentSongId == song.id ? 'active':''">
+            <div class="row align-items-center">
+                <div class="col-11"><a (click)="play(song)" class="title" [ngClass]="currentSongId == song.id ? '':'h'">{{song.title}}</a></div>
+                <div class="col-1 text-end">
+                    <div class="btn-group dropstart">
+                        <a class="menu-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img *ngIf="currentSongId != song.id" [src]="icLinesSuccess">
+                            <img *ngIf="currentSongId == song.id" [src]="icLinesWhite">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item">Add to playlist &laquo;</a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li><a class="dropdown-item" href="#">Playlist 1</a></li>
+                                    <li><a class="dropdown-item" href="#">Playlist 2</a></li>
+                                    <li><a class="dropdown-item" href="#">Playlist 3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
