@@ -11,6 +11,8 @@ import { SongService } from '../inicio/song.service';
 })
 export class ItemsComponent {
 
+  loading = true
+
   icLinesSuccess = '../../assets/icon/more_horizontal_lines.svg';
   icLinesWhite = '../../assets/icon/more_horizontal_lines_white.svg';
   icPause = '../../assets/icon/pause.svg';
@@ -77,6 +79,10 @@ export class ItemsComponent {
 
     this.songs.getMusicList().subscribe(songs => {
       this.musicList = songs
+      console.log("Entró-------------------")
+      if(this.musicList.length > 0){
+        this.loading = false
+      }
     })
 
     this.audio.ondurationchange = () => {
