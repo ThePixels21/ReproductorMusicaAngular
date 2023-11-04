@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegistroComponent } from './registro/registro.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { LoginComponent } from './login/login.component';
-import { PlaylistsComponent } from './playlists/playlists.component';
 import { ArtistsComponent } from './artists/artists/artists.component';
 import { ItemsComponent } from './items/items.component';
 import { UploadSongComponent } from './upload-song/upload-song.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ProfileComponent } from './artists/profile/profile.component';
 import { SearchResultsComponent } from './barra-busqueda/search-results/search-results.component';
+import { PlaylistsComponent } from './playlists/playlists/playlists.component';
 
 const routes: Routes = [
   {

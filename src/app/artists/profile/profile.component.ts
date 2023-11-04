@@ -43,7 +43,7 @@ export class ProfileComponent {
       if (this.paused == true) {
         this.playing = false
       } else {
-        if (this.currentPlaylist == this.songs) {
+        if (this.currentPlaylist.join() == this.songs.join()) {
           this.playing = true
         }
       }

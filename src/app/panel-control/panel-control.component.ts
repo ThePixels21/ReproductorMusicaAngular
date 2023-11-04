@@ -78,6 +78,10 @@ export class PanelControlComponent {
 
   }
 
+  ngOnInit(){
+    this.volumeSlider = this.audio.volume * 16
+  }
+
   play(): void {
     if (this.audio.paused) {
       if (this.audio.readyState === 0) {

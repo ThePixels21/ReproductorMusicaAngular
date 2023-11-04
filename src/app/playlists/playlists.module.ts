@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PlaylistsRoutingModule } from './playlists-routing.module';
-import { PlaylistsComponent } from './playlists.component';
 import { NavbarModule } from '../navbar/navbar.module';
 import { BarraBusquedaModule } from '../barra-busqueda/barra-busqueda.module';
+import { PlaylistsComponent } from './playlists/playlists.component';
 
 
 @NgModule({
