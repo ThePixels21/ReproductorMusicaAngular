@@ -1,1 +1,42 @@
-<p>my-playlists works!</p>
+<ul class="list-group mb-2">
+    <li class="list-group-item pb-0 pt-0">
+        <div class="row">
+            <div class="col-11 mt-2">
+                <h6>Created</h6>
+            </div>
+            <div class="col-1 text-center">
+                <img class="play" [src]="icAdd" type="button" data-bs-toggle="modal" data-bs-target="#newPlaylistModal">
+            </div>
+        </div>
+    </li>
+    <ul class="list-group footer-space">
+        <li *ngFor="let playlist of playlists, let i = index" [attr.data-index]="i" class="list-group-item">
+            <div class="row align-items-center">
+                <div class="col-12"><a class="title">{{playlist.name}}</a></div>
+            </div>
+        </li>
+    </ul>
+</ul>
+
+<div class="modal fade modal-dialog modal-dialog-centered" id="newPlaylistModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">New playlist</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="formAdd" (ngSubmit)="addPlaylist()">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label text-white">Name:</label>
+                        <input formControlName="name" type="text" class="form-control" id="name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

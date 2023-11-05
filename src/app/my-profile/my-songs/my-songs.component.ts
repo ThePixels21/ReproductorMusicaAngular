@@ -52,7 +52,6 @@ export class MySongsComponent {
   }
 
   ngOnInit() {
-    this.nickname = sessionStorage.getItem('nickname')!!
     this.activatedRoute.parent!!.params.subscribe(params => {
       this.nickname = params['nickname']
       this.loadItems()

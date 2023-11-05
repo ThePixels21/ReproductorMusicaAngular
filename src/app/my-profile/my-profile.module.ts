@@ -6,6 +6,7 @@ import { MySongsComponent } from './my-songs/my-songs.component';
 import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
 import { MyProfileComponent } from './my-profile.component';
 import { PanelControlModule } from '../panel-control/panel-control.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { PanelControlModule } from '../panel-control/panel-control.module';
   imports: [
     CommonModule,
     MyProfileRoutingModule,
-    PanelControlModule
+    PanelControlModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MyProfileComponent,
