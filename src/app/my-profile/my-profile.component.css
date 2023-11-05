@@ -1,37 +1,12 @@
-a.title {
-    text-decoration: none;
-    cursor: pointer;
+.nav-tabs .nav-link {
+    text-decoration: none !important;
     color: #dee2e6;
 }
 
-a.title.h:hover {
-    color: #198754;
+.nav-tabs .nav-link:hover {
+    color: #f1f6fc;
 }
 
-a.menu-btn {
-    cursor: pointer;
-}
-
-img.play{
-    cursor:pointer
-}
-
-.active {
-    background-color: #198754;
-    border-color: #198754;
-}
-
-.dropdown-menu li {
-    position: relative;
-}
-
-.dropdown-menu .dropdown-submenu {
-    display: none;
-    position: absolute;
-    right: 101%;
-    top: -7px;
-}
-
-.dropdown-menu>li:hover>.dropdown-submenu {
-    display: block;
+.footer-space{
+    padding-bottom: 120px;
 }

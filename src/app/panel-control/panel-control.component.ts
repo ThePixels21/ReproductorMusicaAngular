@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { ISong } from '../models/ISong';
 import { SongService } from '../inicio/song.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-panel-control',
@@ -75,6 +76,23 @@ export class PanelControlComponent {
     this.songs.getCurrentPlaylist().subscribe(songs => {
       this.musicList = songs
     })
+
+    this.audio.ondurationchange = () => {
+      const totalSeconds = Math.floor(this.audio.duration), 
+      duration = moment.duration(totalSeconds, 'seconds');
+      const musicLength = duration.seconds() < 10 ? `${Math.floor(duration.asMinutes())}:0${duration.seconds()}` :
+        `${Math.floor(duration.asMinutes())}:${duration.seconds()}`;
+      this.songs.setCurrentSongLength(musicLength)
+      this.songs.setCurrentSongDuration(totalSeconds)
+    }
+
+    this.audio.ontimeupdate = () => {
+      const duration = moment.duration(Math.floor(this.audio.currentTime), 'seconds');
+      let secs = duration.seconds(), mins = duration.asMinutes();
+      const currentTime = secs < 10 ? `${Math.floor(mins)}:0${secs}` :
+        `${Math.floor(mins)}:${secs}`;
+      this.songs.setCurrentTime(currentTime)
+    }
 
   }
 

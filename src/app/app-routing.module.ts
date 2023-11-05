@@ -10,6 +10,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ProfileComponent } from './artists/profile/profile.component';
 import { SearchResultsComponent } from './barra-busqueda/search-results/search-results.component';
 import { PlaylistsComponent } from './playlists/playlists/playlists.component';
+import { MySongsComponent } from './my-profile/my-songs/my-songs.component';
+import { MyPlaylistsComponent } from './my-profile/my-playlists/my-playlists.component';
 
 const routes: Routes = [
   {
@@ -57,7 +59,17 @@ const routes: Routes = [
   },
   {
     path: 'my-profile/:nickname',
-    component: MyProfileComponent
+    component: MyProfileComponent,
+    children: [
+      {
+        path: 'songs',
+        component: MySongsComponent
+      },
+      {
+        path: 'playlists',
+        component: MyPlaylistsComponent
+      }
+    ]
   }
 ];
 

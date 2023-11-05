@@ -31,12 +31,11 @@ import { ArtistsModule } from './artists/artists.module';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadSongModule } from './upload-song/upload-song.module';
-import { MyProfileComponent } from './my-profile/my-profile.component';
+import { MyProfileModule } from './my-profile/my-profile.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MyProfileComponent
+    AppComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -53,6 +52,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ArtistsModule,
     PlaylistsModule,
     UploadSongModule,
+    MyProfileModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

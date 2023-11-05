@@ -30,7 +30,7 @@ export class NavbarComponent {
   }
 
   onProfile(){
-    this.router.navigate(['/my-profile', sessionStorage.getItem('nickname')])
+    this.router.navigate(['/my-profile', sessionStorage.getItem('nickname'), 'songs'])
   }
 
 }
