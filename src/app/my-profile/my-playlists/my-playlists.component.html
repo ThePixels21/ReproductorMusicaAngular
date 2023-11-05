@@ -9,16 +9,17 @@
             </div>
         </div>
     </li>
-    <ul class="list-group footer-space">
-        <li *ngFor="let playlist of playlists, let i = index" [attr.data-index]="i" class="list-group-item">
-            <div class="row align-items-center">
-                <div class="col-12"><a class="title">{{playlist.name}}</a></div>
-            </div>
-        </li>
-    </ul>
+</ul>
+<ul class="list-group footer-space">
+    <li *ngFor="let playlist of playlists, let i = index" [attr.data-index]="i" class="list-group-item">
+        <div class="row align-items-center">
+            <div class="col-12"><a class="title h">{{playlist.name}}</a></div>
+        </div>
+    </li>
 </ul>
 
-<div class="modal fade modal-dialog modal-dialog-centered" id="newPlaylistModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-dialog modal-dialog-centered" id="newPlaylistModal" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,7 +30,10 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name" class="col-form-label text-white">Name:</label>
-                        <input formControlName="name" type="text" class="form-control" id="name">
+                        <input formControlName="name" type="text" class="form-control" id="name"
+                            placeholder="Type a playlist name">
+                        <div *ngIf="formAdd.get('name')?.touched && formAdd.get('name')?.errors?.['required']"
+                            class="alert alert-danger mt-2" role="alert">Name is required</div>
                     </div>
                 </div>
                 <div class="modal-footer">

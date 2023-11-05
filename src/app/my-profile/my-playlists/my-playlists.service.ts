@@ -25,7 +25,7 @@ export class MyPlaylistsService {
 
    getPlaylistsByNickname(nickname: string){
     const playlistCollection = collection(this.firestore, 'playlists')
-    const playlistQuery = query(playlistCollection, where('userId', '==', nickname))
+    const playlistQuery = query(playlistCollection, where('userNickname', '==', nickname))
     return getDocs(playlistQuery)
    }
 

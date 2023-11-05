@@ -3,6 +3,8 @@ import { IPlaylist } from 'src/app/models/IPlaylist';
 import { MyPlaylistsService } from './my-playlists.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SwalUtils } from 'src/app/utils/swal-utils';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-my-playlists',
@@ -46,6 +48,26 @@ export class MyPlaylistsComponent {
     .catch(err => console.log(err))
   }
 
-  addPlaylist(){}
+  async addPlaylist(){
+    if(this.formAdd.valid){
+      SwalUtils.loadingMessage('Creating...')
+      var playlist: IPlaylist = {
+        id: '',
+        userNickname: this.nickname,
+        name: this.formAdd.value.name,
+        songsIds: []
+      }
+      try{
+        const result = await this.playlistService.savePlaylist(playlist)
+        console.log(`Uploaded successful---------\n${result}`)
+        Swal.close()
+        SwalUtils.customMessageOk('Created', 'Playlist created succesfully')
+        this.loadItems()
+      }catch(err){
+        console.log(`Error creating playlist----------\n${err}`);
+        SwalUtils.customMessageError('Error creating playlist', 'Contact support')
+      }
+    }
+  }
 
 }

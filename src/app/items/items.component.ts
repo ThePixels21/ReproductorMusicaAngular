@@ -79,7 +79,6 @@ export class ItemsComponent {
 
     this.songs.getMusicList().subscribe(songs => {
       this.musicList = songs
-      console.log("Entró-------------------")
       if(this.musicList.length > 0){
         this.loading = false
       }

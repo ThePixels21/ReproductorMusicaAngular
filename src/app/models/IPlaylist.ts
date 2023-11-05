@@ -1,6 +1,6 @@
 export interface IPlaylist{
     id: string;
-    userId: string;
+    userNickname: string;
     name: string;
     songsIds: string[];
 }
