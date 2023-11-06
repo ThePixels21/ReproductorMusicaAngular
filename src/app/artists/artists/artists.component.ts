@@ -9,7 +9,7 @@ import { ArtistsService } from '../artists.service';
 })
 export class ArtistsComponent {
 
-  users!: IUser[]
+  users: IUser[] = []
   loading = true
 
   constructor(private artistsService: ArtistsService) { }

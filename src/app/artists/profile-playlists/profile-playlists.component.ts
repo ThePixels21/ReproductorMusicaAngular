@@ -10,8 +10,10 @@ import { ArtistsService } from '../artists.service';
 })
 export class ProfilePlaylistsComponent {
 
+  loading = true
+
   nickname!: string
-  playlists!: IPlaylist[]
+  playlists: IPlaylist[] = []
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,6 +31,7 @@ export class ProfilePlaylistsComponent {
     this.artistService.getPublicPlaylistsByNickname(this.nickname)
     .then(snap => {
       this.playlists = snap.docs.map(doc => doc.data() as IPlaylist)
+      this.loading = false
       console.log(this.playlists)
     })
     .catch(err => console.log(err))

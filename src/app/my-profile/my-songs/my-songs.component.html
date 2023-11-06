@@ -16,6 +16,11 @@
         <div class="col-12 text-white">Loading...</div>
     </div>
 </ul>
+<ul *ngIf="!loading && !(songs.length>0)" class="list-group">
+    <div class="row align-items-center text-center">
+        <div class="col-12 text-white">No songs avaliable</div>
+    </div>
+</ul>
 <ul class="list-group footer-space">
     <li *ngFor="let song of songs, let i = index" [attr.data-index]="i" class="list-group-item"
         [ngClass]="currentSongId == song.id ? 'active':''">

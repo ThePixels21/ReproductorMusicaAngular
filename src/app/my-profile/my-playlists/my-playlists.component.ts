@@ -17,6 +17,8 @@ export class MyPlaylistsComponent {
   icAdd = '../../../assets/icon/add.svg'
   formAdd!: FormGroup
 
+  loading = true
+
   nickname!: string
   playlists!: IPlaylist[]
 
@@ -27,6 +29,7 @@ export class MyPlaylistsComponent {
     ){
       this.playlistService.getMyPlaylists().subscribe(playlists => {
         this.playlists = playlists
+        this.loading = false
       })
     }
 

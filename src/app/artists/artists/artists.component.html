@@ -13,6 +13,11 @@
             <div class="col-12 text-white">Loading...</div>
         </div>
     </ul>
+    <ul *ngIf="!loading && !(users.length>0)" class="list-group">
+        <div class="row align-items-center text-center">
+            <div class="col-12 text-white">No artists avaliable</div>
+        </div>
+    </ul>
     <ul *ngIf="!loading" class="list-group">
         <li *ngFor="let user of users" class="list-group-item">
             <div class="row align-items-center">

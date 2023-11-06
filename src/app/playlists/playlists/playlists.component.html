@@ -1,17 +1,31 @@
 <div class="contenedor">
     <ul class="list-group mb-2">
-        <li class="list-group-item pb-0 pt-0">
+        <li class="list-group-item pb-0">
             <div class="row">
-                <div class="col-12 mt-2">
-                    <h6>Recent playlists</h6>
+                <div class="col-6">
+                    <h6>Recent</h6>
+                </div>
+                <div class="col-6">
+                    <h6>Artist</h6>
                 </div>
             </div>
         </li>
     </ul>
+    <ul *ngIf="loading" class="list-group">
+        <div class="row align-items-center text-center">
+            <div class="col-12 text-white">Loading...</div>
+        </div>
+    </ul>
+    <ul *ngIf="!loading && !(playlists.length>0)" class="list-group">
+        <div class="row align-items-center text-center">
+            <div class="col-12 text-white">No playlists avaliable</div>
+        </div>
+    </ul>
     <ul class="list-group footer-space">
         <li *ngFor="let playlist of playlists, let i = index" [attr.data-index]="i" class="list-group-item">
             <div class="row align-items-center">
-                <div class="col-12"><a routerLink="/" class="title h">{{playlist.name}}</a></div>
+                <div class="col-6"><a routerLink="/artists/profile/{{playlist.userNickname}}/playlists/{{playlist.id}}" class="title h">{{playlist.name}}</a></div>
+                <div class="col-6"><a routerLink="/artists/profile/{{playlist.userNickname}}/playlists" class="title h">{{playlist.userNickname}}</a></div>
             </div>
         </li>
     </ul>

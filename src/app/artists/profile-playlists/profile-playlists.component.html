@@ -7,6 +7,16 @@
         </div>
     </li>
 </ul>
+<ul *ngIf="loading" class="list-group">
+    <div class="row align-items-center text-center">
+        <div class="col-12 text-white">Loading...</div>
+    </div>
+</ul>
+<ul *ngIf="!loading && !(playlists.length>0)" class="list-group">
+    <div class="row align-items-center text-center">
+        <div class="col-12 text-white">No playlists avaliable</div>
+    </div>
+</ul>
 <ul class="list-group footer-space">
     <li *ngFor="let playlist of playlists, let i = index" [attr.data-index]="i" class="list-group-item">
         <div class="row align-items-center">
