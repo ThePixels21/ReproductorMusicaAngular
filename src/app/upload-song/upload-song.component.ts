@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ISong } from '../models/ISong';
 import { SwalUtils } from '../utils/swal-utils';
 import Swal from 'sweetalert2';
+import { SongService } from '../inicio/song.service';
 
 @Component({
   selector: 'app-upload-song',
@@ -18,6 +19,7 @@ export class UploadSongComponent {
 
   constructor(
     private uploadSongService: UploadSongService, 
+    private songService: SongService,
     private fb: FormBuilder
     ){}
 
@@ -52,6 +54,7 @@ export class UploadSongComponent {
           console.log(`Uploaded successful---------\n${result}`);
           Swal.close()
           SwalUtils.customMessageOk('Uploaded', 'Song uploaded succesfully')
+          this.songService.updateMusicList()
         } catch (err) {
           console.log(`Error uploading song----------\n${err}`);
           SwalUtils.customMessageError('Error uploading', 'Contact support')

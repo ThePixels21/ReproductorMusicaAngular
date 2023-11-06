@@ -48,6 +48,16 @@ export class SongService {
     return getDocs(songCollection)
   }
 
+  updateMusicList(){
+    this.getAllSongs()
+      .then(snap => {
+          const songs: ISong[] = snap.docs.map(doc => doc.data() as ISong)
+          this.songs = songs
+          this.setMusicList(this.songs)
+        })
+        .catch(err => console.log(err))
+  }
+
   getAudio() {
     return this.audio.asObservable()
   }
