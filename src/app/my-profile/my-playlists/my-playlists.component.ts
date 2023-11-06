@@ -50,7 +50,8 @@ export class MyPlaylistsComponent {
         id: '',
         userNickname: this.nickname,
         name: this.formAdd.value.name,
-        songsIds: []
+        songsIds: [],
+        public: false
       }
       try{
         const result = await this.playlistService.savePlaylist(playlist)

@@ -83,6 +83,13 @@ export class MyPlaylistsService {
     });
   }
 
+  async updatePlaylistStatus(playlistId: string, status: boolean) {
+    const playlistRef = doc(this.firestore, 'playlists', playlistId);
+    await updateDoc(playlistRef, {
+      public: status
+    });
+  }
+
   deletePlaylist(playlistId: string) {
     const playlistRef = doc(this.firestore, 'playlists', playlistId);
     return deleteDoc(playlistRef);

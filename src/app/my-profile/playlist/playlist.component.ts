@@ -30,6 +30,7 @@ export class PlaylistComponent {
   id!: string
   name!: string
   playlist!: IPlaylist
+  public!: boolean
 
   songs: ISong[] = []
   currentPlaylist!: ISong[]
@@ -76,6 +77,7 @@ export class PlaylistComponent {
       .then(doc => {
         this.playlist = doc.data() as IPlaylist
         this.name = this.playlist.name
+        this.public = this.playlist.public
         this.playlistService.getSongsFromPlaylist(this.playlist)
           .then(songs => {
             this.songs = songs as ISong[]
@@ -135,6 +137,20 @@ export class PlaylistComponent {
         SwalUtils.customMessageOk('Added', 'Songs added succesfully')
         this.loading = true
         this.loadItems()
+      })
+      .catch(err => console.log(err))
+  }
+
+  updateStatus() {
+    if (this.public) {
+      SwalUtils.loadingMessage('Updating playlist status to public...')
+    } else {
+      SwalUtils.loadingMessage('Updating playlist status to private...')
+    }
+    this.playlistService.updatePlaylistStatus(this.id, this.public)
+      .then(res => {
+        Swal.close()
+        SwalUtils.customMessageOk('Updated', 'Status updated succesfully')
       })
       .catch(err => console.log(err))
   }

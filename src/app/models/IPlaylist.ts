@@ -3,4 +3,5 @@ export interface IPlaylist{
     userNickname: string;
     name: string;
     songsIds: string[];
+    public: boolean;
 }

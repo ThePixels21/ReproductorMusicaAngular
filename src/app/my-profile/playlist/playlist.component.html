@@ -1,7 +1,13 @@
 <div class="contenedor">
     <div class="row">
-        <div class="col-11 text-white">
+        <div class="col-10 text-white">
             <h2>{{name}}</h2>
+        </div>
+        <div class="col-1 text-white d-flex align-items-center justify-content-center">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="public" (ngModelChange)="updateStatus()">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Public</label>
+            </div>
         </div>
         <div class="col-1 text-center text-white">
             <img *ngIf="!playing" (click)="play(0)" class="mt-2 play" [src]="icPlay">
