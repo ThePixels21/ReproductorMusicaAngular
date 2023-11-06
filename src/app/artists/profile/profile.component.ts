@@ -25,7 +25,7 @@ export class ProfileComponent {
   paused = true
 
   nickname: string = ""
-  songs!: ISong[]
+  songs: ISong[] = []
   currentPlaylist!: ISong[]
   currentSongId: string = ""
 

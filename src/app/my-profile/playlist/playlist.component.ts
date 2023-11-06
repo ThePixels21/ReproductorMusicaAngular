@@ -31,7 +31,7 @@ export class PlaylistComponent {
   name!: string
   playlist!: IPlaylist
 
-  songs!: ISong[]
+  songs: ISong[] = []
   currentPlaylist!: ISong[]
   currentSongId: string = ""
 
@@ -60,6 +60,7 @@ export class PlaylistComponent {
         }
       }
     })
+
   }
 
   ngOnInit() {
@@ -72,22 +73,27 @@ export class PlaylistComponent {
   loadItems() {
     this.playlistService.loadPlaylists()
     this.playlistService.getPlaylistById(this.id)
-    .then(doc => {
-      this.playlist = doc.data() as IPlaylist
-      this.name = this.playlist.name
-      this.playlistService.getSongsFromPlaylist(this.playlist)
-      .then(songs => {
-        this.songs = songs as ISong[]
-        this.loading = false
-        console.log(this.songs)
-        this.songService.getMusicList().subscribe(songs => {
-          this.allSongs = songs.map(song => ({ ...song, selected: this.playlist.songsIds.includes(song.id!!) }))
-          this.loadingModal = false
-        })
+      .then(doc => {
+        this.playlist = doc.data() as IPlaylist
+        this.name = this.playlist.name
+        this.playlistService.getSongsFromPlaylist(this.playlist)
+          .then(songs => {
+            this.songs = songs as ISong[]
+            this.loading = false
+            console.log(this.songs)
+            if (this.currentPlaylist.join() == this.songs.join() && this.paused == false) {
+              this.playing = true
+            } else {
+              this.playing = false
+            }
+            this.songService.getMusicList().subscribe(songs => {
+              this.allSongs = songs.map(song => ({ ...song, selected: this.playlist.songsIds.includes(song.id!!) }))
+              this.loadingModal = false
+            })
+          })
+          .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
-    })
-    .catch(err => console.log(err))
   }
 
   play(index: number) {
@@ -106,31 +112,31 @@ export class PlaylistComponent {
     this.songService.setPaused(true)
   }
 
-  addSong(){
+  addSong() {
     SwalUtils.loadingMessage('Adding songs...')
     const selectedSongIds: string[] = this.allSongs.filter(song => song.selected).map(song => song.id) as string[]
     this.playlistService.updatePlaylistSongs(this.id, selectedSongIds)
-    .then(res => {
-      Swal.close()
-      SwalUtils.customMessageOk('Added', 'Songs added succesfully')
-      this.loading = true
-      this.loadItems()
-    })
-    .catch(err => console.log(err))
+      .then(res => {
+        Swal.close()
+        SwalUtils.customMessageOk('Added', 'Songs added succesfully')
+        this.loading = true
+        this.loadItems()
+      })
+      .catch(err => console.log(err))
   }
 
-  removeSong(songId: string){
+  removeSong(songId: string) {
     SwalUtils.loadingMessage('Removing song...')
     this.songs = this.songs.filter(song => song.id !== songId)
     const selectedSongIds: string[] = this.songs.map(song => song.id) as string[]
     this.playlistService.updatePlaylistSongs(this.id, selectedSongIds)
-    .then(res => {
-      Swal.close()
-      SwalUtils.customMessageOk('Added', 'Songs added succesfully')
-      this.loading = true
-      this.loadItems()
-    })
-    .catch(err => console.log(err))
+      .then(res => {
+        Swal.close()
+        SwalUtils.customMessageOk('Added', 'Songs added succesfully')
+        this.loading = true
+        this.loadItems()
+      })
+      .catch(err => console.log(err))
   }
 
 }
