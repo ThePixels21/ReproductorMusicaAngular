@@ -23,6 +23,11 @@ export class MyPlaylistsService {
     this.loginService.userDataReady.subscribe(() => {
       this.loadPlaylists()
     })
+    this.loginService.userState().subscribe(res => {
+      if(!res){
+        this.loadPlaylists()
+      }
+    })
   }
 
   getMyPlaylists() {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Auth, onAuthStateChanged, signInWithEmailAndPassword, User, signOut } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { MyPlaylistsService } from '../my-profile/my-playlists.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,16 @@ export class LoginService {
   user$: Observable<User | null>;
   userDataReady = new ReplaySubject<void>();
 
-  constructor(private auth: Auth, private firestore: Firestore) {
+  constructor(
+    private auth: Auth, 
+    private firestore: Firestore
+    ) {
     this.userSubject = new BehaviorSubject<User | null>(null)
     this.user$ = this.userSubject.asObservable();
     onAuthStateChanged(this.auth, (user) => { this.userSubject.next(user) })
     this.userState().subscribe(res => {
       if (res) {
         this.saveUserData(res.uid)
-
       } else {
         sessionStorage.clear()
       }
@@ -30,6 +33,7 @@ export class LoginService {
   }
 
   logout() {
+    sessionStorage.clear()
     return signOut(this.auth)
   }
 

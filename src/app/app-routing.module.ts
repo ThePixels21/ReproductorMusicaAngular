@@ -18,6 +18,8 @@ import { ProfilePlaylistsComponent } from './artists/profile-playlists/profile-p
 import { ProfilePlaylistComponent } from './artists/profile-playlist/profile-playlist.component';
 import { SearchResultsArtistsComponent } from './barra-busqueda/search-results-artists/search-results-artists.component';
 import { SearchResultsPlaylistsComponent } from './barra-busqueda/search-results-playlists/search-results-playlists.component';
+import { sessionGuard } from './guards/session.guard';
+import { nicknameGuard } from './guards/nickname.guard';
 
 const routes: Routes = [
   {
@@ -88,11 +90,13 @@ const routes: Routes = [
   },
   {
     path: 'upload',
-    component: UploadSongComponent
+    component: UploadSongComponent,
+    canActivate: [sessionGuard]
   },
   {
     path: 'my-profile/:nickname',
     component: MyProfileComponent,
+    canActivate: [sessionGuard, nicknameGuard],
     children: [
       {
         path: '',
