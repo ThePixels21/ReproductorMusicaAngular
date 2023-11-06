@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ArtistsService } from 'src/app/artists/artists.service';
-import { SongService } from 'src/app/inicio/song.service';
-import { ISong } from 'src/app/models/ISong';
-import { MyPlaylistsService } from '../my-playlists.service';
 import { IPlaylist } from 'src/app/models/IPlaylist';
+import { ISong } from 'src/app/models/ISong';
+import { ArtistsService } from '../artists.service';
+import { ActivatedRoute } from '@angular/router';
+import { SongService } from 'src/app/inicio/song.service';
+import { MyPlaylistsService } from 'src/app/my-profile/my-playlists.service';
 import { SwalUtils } from 'src/app/utils/swal-utils';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-my-songs',
-  templateUrl: './my-songs.component.html',
-  styleUrls: ['./my-songs.component.css']
+  selector: 'app-profile-songs',
+  templateUrl: './profile-songs.component.html',
+  styleUrls: ['./profile-songs.component.css']
 })
-export class MySongsComponent {
+export class ProfileSongsComponent {
 
-  
   icLinesSuccess = '../../assets/icon/more_horizontal_lines.svg';
   icLinesWhite = '../../assets/icon/more_horizontal_lines_white.svg';
   icPause = '../../assets/icon/pause.svg';
@@ -39,7 +38,7 @@ export class MySongsComponent {
     private activatedRoute: ActivatedRoute,
     private songService: SongService,
     private playlistService: MyPlaylistsService
-  ){
+  ) {
 
     this.playlistService.getMyPlaylists().subscribe(playlists => {
       this.myPlaylists = playlists
@@ -81,7 +80,7 @@ export class MySongsComponent {
         if (this.currentPlaylist.join() != this.songs.join()) {
           this.playing = false
         } else {
-          if(!this.paused){
+          if (!this.paused) {
             this.playing = true
           }
         }
@@ -105,34 +104,19 @@ export class MySongsComponent {
     this.songService.setPaused(true)
   }
 
-  addToPlaylist(songId: string, playlist: IPlaylist){
-    if(!playlist.songsIds.includes(songId)){
+  addToPlaylist(songId: string, playlist: IPlaylist) {
+    if (!playlist.songsIds.includes(songId)) {
       SwalUtils.loadingMessage('Adding song...')
       playlist.songsIds.push(songId)
       this.playlistService.updatePlaylistSongs(playlist.id, playlist.songsIds)
-      .then(res => {
-        Swal.close()
-        SwalUtils.customMessageOk('Added', 'Song added succesfully')
-        this.playlistService.loadPlaylists()
-      })
-      .catch(err => console.log(err))
-    }else {
+        .then(res => {
+          Swal.close()
+          SwalUtils.customMessageOk('Added', 'Song added succesfully')
+          this.playlistService.loadPlaylists()
+        })
+        .catch(err => console.log(err))
+    } else {
       SwalUtils.customMessageError('Error', 'Song is already added')
-    }
-  }
-
-  async deleteSong(song: ISong) {
-    SwalUtils.loadingMessage('Deleting song...')
-    try {
-      await this.songService.deleteSongFromStorage(song.url);
-      await this.songService.deleteSongFromFirestore(song.id!!);
-      Swal.close()
-      SwalUtils.customMessageOk('Deleted', 'Song deleted succesfully')
-      this.songService.updateMusicList()
-      this.loadItems()
-    } catch (err) {
-      console.error(err);
-      SwalUtils.customMessageError('Error deleting song', 'Contact support')
     }
   }
 

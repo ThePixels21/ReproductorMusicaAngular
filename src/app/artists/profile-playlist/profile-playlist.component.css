@@ -1,0 +1,46 @@
+a.title {
+    text-decoration: none;
+    cursor: pointer;
+    color: #dee2e6;
+}
+
+a.artist {
+    text-decoration: none;
+    color: #dee2e6;
+}
+
+a.title.h:hover {
+    color: #198754;
+}
+
+a.menu-btn {
+    cursor: pointer;
+}
+
+img.play{
+    cursor:pointer
+}
+
+.active {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.dropdown-menu li {
+    position: relative;
+}
+
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    right: 101%;
+    top: -7px;
+}
+
+.dropdown-menu>li:hover>.dropdown-submenu {
+    display: block;
+}
+
+.pointer {
+    cursor: pointer;
+}

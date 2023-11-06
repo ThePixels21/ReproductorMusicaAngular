@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, getDocs, query, where } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDoc, getDocs, query, where } from '@angular/fire/firestore';
 import IUser from '../models/IUser';
+import { IPlaylist } from '../models/IPlaylist';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +30,16 @@ export class ArtistsService {
     return usersWithSongs
   }
 
-  getSongsByNickname(nickname: string){
+  getSongsByNickname(nickname: string) {
     const songCollection = collection(this.firestore, 'songs')
     const songQuery = query(songCollection, where('artist', '==', nickname))
     return getDocs(songQuery)
+  }
+
+  getPublicPlaylistsByNickname(nickname: string) {
+    const playlistCollection = collection(this.firestore, 'playlists')
+    const playlistQuery = query(playlistCollection, where('userNickname', '==', nickname), where('public', '==', true))
+    return getDocs(playlistQuery)
   }
 
 }

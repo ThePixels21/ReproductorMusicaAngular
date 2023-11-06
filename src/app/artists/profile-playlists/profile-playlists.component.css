@@ -1,0 +1,13 @@
+a.title {
+    text-decoration: none;
+    cursor: pointer;
+    color: #dee2e6;
+}
+
+a.title.h:hover {
+    color: #198754;
+}
+
+a.menu-btn {
+    cursor: pointer;
+}

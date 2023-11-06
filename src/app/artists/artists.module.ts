@@ -6,12 +6,18 @@ import { ArtistsComponent } from './artists/artists.component';
 import { BarraBusquedaModule } from '../barra-busqueda/barra-busqueda.module';
 import { NavbarModule } from '../navbar/navbar.module';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileSongsComponent } from './profile-songs/profile-songs.component';
+import { ProfilePlaylistsComponent } from './profile-playlists/profile-playlists.component';
+import { ProfilePlaylistComponent } from './profile-playlist/profile-playlist.component';
 
 
 @NgModule({
   declarations: [
     ArtistsComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileSongsComponent,
+    ProfilePlaylistsComponent,
+    ProfilePlaylistComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +27,10 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   exports: [
     ArtistsComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileSongsComponent,
+    ProfilePlaylistsComponent,
+    ProfilePlaylistComponent
   ]
 })
 export class ArtistsModule { }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IPlaylist } from 'src/app/models/IPlaylist';
 
 @Component({
   selector: 'app-playlists',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./playlists.component.css']
 })
 export class PlaylistsComponent {
+
+  playlists: IPlaylist[] = []
 
 }

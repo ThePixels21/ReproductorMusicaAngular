@@ -13,6 +13,9 @@ import { PlaylistsComponent } from './playlists/playlists/playlists.component';
 import { MySongsComponent } from './my-profile/my-songs/my-songs.component';
 import { MyPlaylistsComponent } from './my-profile/my-playlists/my-playlists.component';
 import { MyPlaylistComponent } from './my-profile/my-playlist/my-playlist.component';
+import { ProfileSongsComponent } from './artists/profile-songs/profile-songs.component';
+import { ProfilePlaylistsComponent } from './artists/profile-playlists/profile-playlists.component';
+import { ProfilePlaylistComponent } from './artists/profile-playlist/profile-playlist.component';
 
 const routes: Routes = [
   {
@@ -42,7 +45,26 @@ const routes: Routes = [
       },
       {
         path: 'artists/profile/:nickname',
-        component: ProfileComponent
+        component: ProfileComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'songs',
+            pathMatch: 'full'
+          },
+          {
+            path: 'songs',
+            component: ProfileSongsComponent
+          },
+          {
+            path: 'playlists',
+            component: ProfilePlaylistsComponent
+          },
+          {
+            path: 'playlists/:playlistId',
+            component: ProfilePlaylistComponent
+          }
+        ]
       }
     ]
   },
@@ -62,6 +84,11 @@ const routes: Routes = [
     path: 'my-profile/:nickname',
     component: MyProfileComponent,
     children: [
+      {
+        path: '',
+        redirectTo: 'songs',
+        pathMatch: 'full'
+      },
       {
         path: 'songs',
         component: MySongsComponent

@@ -1,33 +1,34 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArtistsService } from 'src/app/artists/artists.service';
 import { SongService } from 'src/app/inicio/song.service';
-import { ISong } from 'src/app/models/ISong';
-import { MyPlaylistsService } from '../my-playlists.service';
 import { IPlaylist } from 'src/app/models/IPlaylist';
+import { ISong } from 'src/app/models/ISong';
+import { ArtistsService } from '../artists.service';
 import { SwalUtils } from 'src/app/utils/swal-utils';
 import Swal from 'sweetalert2';
+import { MyPlaylistsService } from 'src/app/my-profile/my-playlists.service';
 
 @Component({
-  selector: 'app-my-songs',
-  templateUrl: './my-songs.component.html',
-  styleUrls: ['./my-songs.component.css']
+  selector: 'app-profile-playlist',
+  templateUrl: './profile-playlist.component.html',
+  styleUrls: ['./profile-playlist.component.css']
 })
-export class MySongsComponent {
+export class ProfilePlaylistComponent {
 
-  
   icLinesSuccess = '../../assets/icon/more_horizontal_lines.svg';
   icLinesWhite = '../../assets/icon/more_horizontal_lines_white.svg';
   icPause = '../../assets/icon/pause.svg';
   icPlay = '../../assets/icon/play.svg';
 
+  playing = false
+  paused = true
   loading = true
 
-  playing = false
+  id!: string
+  name!: string
+  playlist!: IPlaylist
+  public!: boolean
 
-  paused = true
-
-  nickname: string = ""
   songs: ISong[] = []
   currentPlaylist!: ISong[]
   currentSongId: string = ""
@@ -35,11 +36,10 @@ export class MySongsComponent {
   myPlaylists: IPlaylist[] = []
 
   constructor(
-    private artistsService: ArtistsService,
     private activatedRoute: ActivatedRoute,
     private songService: SongService,
     private playlistService: MyPlaylistsService
-  ){
+  ) {
 
     this.playlistService.getMyPlaylists().subscribe(playlists => {
       this.myPlaylists = playlists
@@ -63,28 +63,33 @@ export class MySongsComponent {
         }
       }
     })
+
   }
 
   ngOnInit() {
-    this.activatedRoute.parent!!.params.subscribe(params => {
-      this.nickname = params['nickname']
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params['playlistId']
       this.loadItems()
     })
   }
 
   loadItems() {
-    this.artistsService.getSongsByNickname(this.nickname)
-      .then(snap => {
-        this.songs = snap.docs.map(doc => doc.data() as ISong)
-        this.loading = false
-        console.log(this.songs)
-        if (this.currentPlaylist.join() != this.songs.join()) {
-          this.playing = false
-        } else {
-          if(!this.paused){
-            this.playing = true
-          }
-        }
+    this.playlistService.getPlaylistById(this.id)
+      .then(doc => {
+        this.playlist = doc.data() as IPlaylist
+        this.name = this.playlist.name
+        this.playlistService.getSongsFromPlaylist(this.playlist)
+          .then(songs => {
+            this.songs = songs as ISong[]
+            this.loading = false
+            console.log(this.songs)
+            if (this.currentPlaylist.join() == this.songs.join() && this.paused == false) {
+              this.playing = true
+            } else {
+              this.playing = false
+            }
+          })
+          .catch(err => console.log(err))
       })
       .catch(err => console.log(err))
   }
@@ -118,21 +123,6 @@ export class MySongsComponent {
       .catch(err => console.log(err))
     }else {
       SwalUtils.customMessageError('Error', 'Song is already added')
-    }
-  }
-
-  async deleteSong(song: ISong) {
-    SwalUtils.loadingMessage('Deleting song...')
-    try {
-      await this.songService.deleteSongFromStorage(song.url);
-      await this.songService.deleteSongFromFirestore(song.id!!);
-      Swal.close()
-      SwalUtils.customMessageOk('Deleted', 'Song deleted succesfully')
-      this.songService.updateMusicList()
-      this.loadItems()
-    } catch (err) {
-      console.error(err);
-      SwalUtils.customMessageError('Error deleting song', 'Contact support')
     }
   }
 

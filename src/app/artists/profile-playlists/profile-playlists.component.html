@@ -1,0 +1,16 @@
+<ul class="list-group mb-2">
+    <li class="list-group-item pb-0 pt-0">
+        <div class="row">
+            <div class="col-12 mt-2">
+                <h6>Created</h6>
+            </div>
+        </div>
+    </li>
+</ul>
+<ul class="list-group footer-space">
+    <li *ngFor="let playlist of playlists, let i = index" [attr.data-index]="i" class="list-group-item">
+        <div class="row align-items-center">
+            <div class="col-12"><a routerLink="/artists/profile/{{nickname}}/playlists/{{playlist.id}}" class="title h">{{playlist.name}}</a></div>
+        </div>
+    </li>
+</ul>

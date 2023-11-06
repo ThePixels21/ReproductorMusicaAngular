@@ -1,8 +1,8 @@
-<ul class="list-group mb-2">
+<ul class="list-group mb-2 mt-2">
     <li class="list-group-item pb-0 pt-0">
         <div class="row">
             <div class="col-11 mt-2">
-                <h6>Released</h6>
+                <h6>Releases</h6>
             </div>
             <div class="col-1 text-end">
                 <img *ngIf="!playing" (click)="play(0)" class="play" [src]="icPlay">
@@ -16,7 +16,7 @@
         <div class="col-12 text-white">Loading...</div>
     </div>
 </ul>
-<ul class="list-group footer-space">
+<ul class="list-group">
     <li *ngFor="let song of songs, let i = index" [attr.data-index]="i" class="list-group-item"
         [ngClass]="currentSongId == song.id ? 'active':''">
         <div class="row align-items-center">
@@ -36,7 +36,6 @@
                                         (click)="addToPlaylist(song.id!!, playlist)">{{playlist.name}}</a></li>
                             </ul>
                         </li>
-                        <li><a class="dropdown-item btn" (click)="deleteSong(song)">Delete</a></li>
                     </ul>
                 </div>
             </div>
