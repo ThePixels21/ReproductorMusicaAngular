@@ -16,6 +16,7 @@ import { MyPlaylistComponent } from './my-profile/my-playlist/my-playlist.compon
 import { ProfileSongsComponent } from './artists/profile-songs/profile-songs.component';
 import { ProfilePlaylistsComponent } from './artists/profile-playlists/profile-playlists.component';
 import { ProfilePlaylistComponent } from './artists/profile-playlist/profile-playlist.component';
+import { SearchResultsArtistsComponent } from './barra-busqueda/search-results-artists/search-results-artists.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
       {
         path: 'home/search/:keyword',
         component: SearchResultsComponent
+      },
+      {
+        path: 'home/search/artists/:keyword',
+        component: SearchResultsArtistsComponent
       },
       {
         path: 'playlists',

@@ -18,6 +18,8 @@ export class SearchResultsComponent {
   icLinesSuccess = '../../assets/icon/more_horizontal_lines.svg';
   icLinesWhite = '../../assets/icon/more_horizontal_lines_white.svg';
 
+  loading = true
+
   keyword = ""
   currentSongId: string = ""
   songs !: ISong[]
@@ -56,6 +58,7 @@ export class SearchResultsComponent {
     this.searchService.searchSongs(this.keyword)
     .then(snap => {
       this.songs = snap.docs.map(doc => doc.data() as ISong)
+      this.loading = false
       console.log(this.songs)
     })
     .catch(err => console.log(err))

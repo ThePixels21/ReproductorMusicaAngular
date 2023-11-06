@@ -14,4 +14,10 @@ export class SearchService {
     return getDocs(songQuery)
   }
 
+  searchUsers(searchText:string){
+    const artistCollection = collection(this.firestore, 'users')
+    const artistQuery = query(artistCollection, where('nickname', '>=', searchText), where('nickname', '<=', searchText + '\uf8ff'))
+    return getDocs(artistQuery)
+  }
+
 }

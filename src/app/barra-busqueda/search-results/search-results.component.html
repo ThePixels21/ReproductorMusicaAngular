@@ -1,6 +1,6 @@
 <div class="contenedor">
     <div class="row">
-        <div class="col-11 text-white">
+        <div class="col-12 text-white">
             <h1>Results</h1>
         </div>
     </div>
@@ -15,6 +15,16 @@
                 </div>
             </div>
         </li>
+    </ul>
+    <ul *ngIf="loading" class="list-group">
+        <div class="row align-items-center text-center">
+            <div class="col-12 text-white">Loading...</div>
+        </div>
+    </ul>
+    <ul *ngIf="!loading && !(songs.length>0)" class="list-group">
+        <div class="row align-items-center text-center">
+            <div class="col-12 text-white">No songs found</div>
+        </div>
     </ul>
     <ul class="list-group">
         <li *ngFor="let song of songs" class="list-group-item" [ngClass]="currentSongId == song.id ? 'active':''">
