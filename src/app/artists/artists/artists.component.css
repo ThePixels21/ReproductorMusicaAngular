@@ -2,3 +2,7 @@ a.artist {
     text-decoration: none;
     color: #dee2e6;
 }
+
+a.artist:hover {
+    color: #198754;
+}

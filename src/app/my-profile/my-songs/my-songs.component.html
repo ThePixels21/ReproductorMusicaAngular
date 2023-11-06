@@ -4,7 +4,7 @@
             <div class="col-11 mt-2">
                 <h6>Released</h6>
             </div>
-            <div class="col-1 text-center">
+            <div class="col-1 text-end">
                 <img *ngIf="!playing" (click)="play(0)" class="play" [src]="icPlay">
                 <img *ngIf="playing" (click)="pause()" class="play" [src]="icPause">
             </div>
