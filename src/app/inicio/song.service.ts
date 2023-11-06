@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ISong } from '../models/ISong';
-import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, deleteDoc, doc, getDocs } from '@angular/fire/firestore';
+import { deleteObject, ref } from '@angular/fire/storage';
+import { getApps, initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
+import { getStorage } from 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SongService {
+
+  private storage: any;
 
   private songs: ISong[] = []
 
@@ -30,6 +36,11 @@ export class SongService {
   private currentPlaylist = new BehaviorSubject(this.currentSongs)
 
   constructor(private firestore: Firestore) {
+    if(!getApps().length){
+      initializeApp(environment.firebase)
+    }
+    this.storage = getStorage()
+
     if (this.songs.length == 0) {
       this.getAllSongs()
       .then(snap => {
@@ -160,6 +171,16 @@ export class SongService {
   setMusicList(list: ISong[]) {
     this.songs = list
     this.musicList.next(list);
+  }
+
+  deleteSongFromStorage(songUrl: string) {
+    const songRef = ref(this.storage, songUrl);
+    return deleteObject(songRef);
+  }
+  
+  deleteSongFromFirestore(songId: string) {
+    const songRef = doc(this.firestore, 'songs', songId);
+    return deleteDoc(songRef);
   }
 
 }

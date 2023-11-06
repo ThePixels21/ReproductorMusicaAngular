@@ -118,4 +118,19 @@ export class MySongsComponent {
     }
   }
 
+  async deleteSong(song: ISong) {
+    SwalUtils.loadingMessage('Deleting song...')
+    try {
+      await this.songService.deleteSongFromStorage(song.url);
+      await this.songService.deleteSongFromFirestore(song.id!!);
+      Swal.close()
+      SwalUtils.customMessageOk('Deleted', 'Song deleted succesfully')
+      this.songService.updateMusicList()
+      this.loadItems()
+    } catch (err) {
+      console.error(err);
+      SwalUtils.customMessageError('Error deleting song', 'Contact support')
+    }
+  }
+
 }
