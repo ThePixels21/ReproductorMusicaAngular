@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MyProfileComponent {
 
+  icNavigateBack = '../../assets/icon/navigateBack.svg'
   nickname: string = ""
 
   constructor(private activatedRoute: ActivatedRoute){}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IPlaylist } from 'src/app/models/IPlaylist';
-import { MyPlaylistsService } from './my-playlists.service';
+import { MyPlaylistsService } from '../my-playlists.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SwalUtils } from 'src/app/utils/swal-utils';
@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class MyPlaylistsComponent {
 
+  icLinesSuccess = '../../assets/icon/more_horizontal_lines.svg';
   icAdd = '../../../assets/icon/add.svg'
   formAdd!: FormGroup
 
@@ -68,6 +69,20 @@ export class MyPlaylistsComponent {
         SwalUtils.customMessageError('Error creating playlist', 'Contact support')
       }
     }
+  }
+
+  deletePlaylist(playlistId: string){
+    SwalUtils.loadingMessage('Deleting...')
+    this.playlistService.deletePlaylist(playlistId)
+    .then(res => {
+      Swal.close()
+      SwalUtils.customMessageOk('Deleted', 'Playlist deleted succesfully')
+      this.loadItems()
+    })
+    .catch(err => {
+      console.log(err)
+      SwalUtils.customMessageError('Error deleting playlist', 'Contact support')
+    })
   }
 
 }

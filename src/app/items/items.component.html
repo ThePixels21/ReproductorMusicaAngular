@@ -27,7 +27,8 @@
             <div class="row align-items-center">
                 <div class="col-6"><a (click)="play(i)" class="title"
                         [ngClass]="currentSongId == song.id ? '':'h'">{{song.title}}</a></div>
-                <div class="col-5"><a class="artist" routerLink="/artists/profile/{{song.artist}}">{{song.artist}}</a>
+                <div class="col-5"><a class="artist title" [ngClass]="currentSongId == song.id ? '':'h'"
+                        routerLink="/artists/profile/{{song.artist}}">{{song.artist}}</a>
                 </div>
                 <div class="col-1 text-end">
                     <div class="btn-group dropstart">
@@ -36,7 +37,8 @@
                             <img *ngIf="currentSongId == song.id" [src]="icLinesWhite">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Go to artist</a></li>
+                            <li><a class="dropdown-item" routerLink="/artists/profile/{{song.artist}}">Go to artist</a>
+                            </li>
                             <li><a class="dropdown-item">Add to playlist &laquo;</a>
                                 <ul class="dropdown-menu dropdown-submenu">
                                     <li><a class="dropdown-item" href="#">Playlist 1</a></li>

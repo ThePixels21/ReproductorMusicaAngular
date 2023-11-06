@@ -4,7 +4,7 @@
             <div class="col-11 mt-2">
                 <h6>Created</h6>
             </div>
-            <div class="col-1 text-center">
+            <div class="col-1 text-end">
                 <img class="play" [src]="icAdd" type="button" data-bs-toggle="modal" data-bs-target="#newPlaylistModal">
             </div>
         </div>
@@ -13,12 +13,22 @@
 <ul class="list-group footer-space">
     <li *ngFor="let playlist of playlists, let i = index" [attr.data-index]="i" class="list-group-item">
         <div class="row align-items-center">
-            <div class="col-12"><a class="title h">{{playlist.name}}</a></div>
+            <div class="col-11"><a routerLink="/my-profile/{{nickname}}/playlists/{{playlist.id}}" class="title h">{{playlist.name}}</a></div>
+            <div class="col-1 text-end">
+                <div class="btn-group dropstart">
+                    <a class="menu-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img [src]="icLinesSuccess">
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item pointer btn" (click)="deletePlaylist(playlist.id)">Delete</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </li>
 </ul>
 
-<div class="modal fade modal-dialog modal-dialog-centered" id="newPlaylistModal" tabindex="-1"
+<div class="modal fade" id="newPlaylistModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -38,7 +48,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Create</button>
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Create</button>
                 </div>
             </form>
         </div>

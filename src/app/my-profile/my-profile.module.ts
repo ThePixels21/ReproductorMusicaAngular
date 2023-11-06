@@ -7,13 +7,15 @@ import { MyPlaylistsComponent } from './my-playlists/my-playlists.component';
 import { MyProfileComponent } from './my-profile.component';
 import { PanelControlModule } from '../panel-control/panel-control.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlaylistComponent } from './playlist/playlist.component';
 
 
 @NgModule({
   declarations: [
     MyProfileComponent,
     MySongsComponent,
-    MyPlaylistsComponent
+    MyPlaylistsComponent,
+    PlaylistComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ISong } from '../models/ISong';
-import * as moment from 'moment';
 import { SongService } from '../inicio/song.service';
 
 @Component({

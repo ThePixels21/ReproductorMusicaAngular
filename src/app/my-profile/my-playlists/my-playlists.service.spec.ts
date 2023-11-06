@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MyPlaylistsService } from './my-playlists.service';
+import { MyPlaylistsService } from '../my-playlists.service';
 
 describe('MyPlaylistsService', () => {
   let service: MyPlaylistsService;

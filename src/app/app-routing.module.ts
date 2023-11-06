@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistroComponent } from './registro/registro.component';
 import { InicioComponent } from './inicio/inicio.component';
@@ -12,6 +12,7 @@ import { SearchResultsComponent } from './barra-busqueda/search-results/search-r
 import { PlaylistsComponent } from './playlists/playlists/playlists.component';
 import { MySongsComponent } from './my-profile/my-songs/my-songs.component';
 import { MyPlaylistsComponent } from './my-profile/my-playlists/my-playlists.component';
+import { PlaylistComponent } from './my-profile/playlist/playlist.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
     component: InicioComponent,
     children: [
       {
-        path: 'home', 
+        path: 'home',
         component: ItemsComponent
       },
       {
@@ -32,11 +33,11 @@ const routes: Routes = [
         component: SearchResultsComponent
       },
       {
-        path: 'playlists', 
+        path: 'playlists',
         component: PlaylistsComponent
       },
       {
-        path: 'artists', 
+        path: 'artists',
         component: ArtistsComponent
       },
       {
@@ -68,6 +69,10 @@ const routes: Routes = [
       {
         path: 'playlists',
         component: MyPlaylistsComponent
+      },
+      {
+        path: 'playlists/:playlistId',
+        component: PlaylistComponent
       }
     ]
   }

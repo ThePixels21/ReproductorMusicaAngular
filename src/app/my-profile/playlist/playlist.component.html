@@ -1,0 +1,107 @@
+<div class="contenedor">
+    <div class="row">
+        <div class="col-11 text-white">
+            <h2>{{name}}</h2>
+        </div>
+        <div class="col-1 text-center text-white">
+            <img *ngIf="!playing" (click)="play(0)" class="mt-2 play" [src]="icPlay">
+            <img *ngIf="playing" (click)="pause()" class="mt-2 play" [src]="icPause">
+        </div>
+    </div>
+    <ul *ngIf="!loading" class="list-group mb-2 mt-2">
+        <li class="list-group-item pb-0 pt-0">
+            <div class="row">
+                <div class="col-6 mt-2">
+                    <h6>Song</h6>
+                </div>
+                <div class="col-5 mt-2">
+                    <h6>Artist</h6>
+                </div>
+                <div class="col-1 text-end">
+                    <img class="play" [src]="icAdd" type="button" data-bs-toggle="modal"
+                        data-bs-target="#addSongsModal">
+                </div>
+            </div>
+        </li>
+    </ul>
+    <ul *ngIf="loading" class="list-group">
+        <div class="row align-items-center text-center">
+            <div class="col-12 text-white">Loading...</div>
+        </div>
+    </ul>
+    <ul *ngIf="!loading" class="list-group">
+        <li *ngFor="let song of songs, let i = index" [attr.data-index]="i" class="list-group-item"
+            [ngClass]="currentSongId == song.id ? 'active':''">
+            <div class="row align-items-center">
+                <div class="col-6"><a (click)="play(i)" class="title"
+                        [ngClass]="currentSongId == song.id ? '':'h'">{{song.title}}</a></div>
+                <div class="col-5"><a class="artist title" [ngClass]="currentSongId == song.id ? '':'h'"
+                        routerLink="/artists/profile/{{song.artist}}">{{song.artist}}</a>
+                </div>
+                <div class="col-1 text-end">
+                    <div class="btn-group dropstart">
+                        <a class="menu-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img *ngIf="currentSongId != song.id" [src]="icLinesSuccess">
+                            <img *ngIf="currentSongId == song.id" [src]="icLinesWhite">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item pointer" (click)="removeSong(song.id!!)">Remove</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<div class="modal fade" id="addSongsModal" tabindex="-1" aria-labelledby="exampleModalScrollableTitle"
+    bis_skin_checked="1" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" id="addSongsModal" bis_skin_checked="1">
+        <div class="modal-content" bis_skin_checked="1">
+            <div class="modal-header" bis_skin_checked="1">
+                <h1 class="modal-title fs-5 text-white" id="exampleModalScrollableTitle">Add songs</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" bis_skin_checked="1">
+                <ul class="list-group mb-2 mt-2">
+                    <li class="list-group-item pb-0 pt-0">
+                        <div class="row">
+                            <div class="col-6 mt-2">
+                                <h6>Song</h6>
+                            </div>
+                            <div class="col-6 mt-2">
+                                <h6>Artist</h6>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul *ngIf="loadingModal" class="list-group">
+                    <div class="row align-items-center text-center">
+                        <div class="col-12 text-white">Loading...</div>
+                    </div>
+                </ul>
+                <ul class="list-group">
+                    <li *ngFor="let song of allSongs, let i = index" [attr.data-index]="i" class="list-group-item"
+                        [ngClass]="currentSongId == song.id ? 'active':''">
+                        <div class="row align-items-center">
+                            <div class="col-6"><a>{{song.title}}</a></div>
+                            <div class="col-5"><a>{{song.artist}}</a>
+                            </div>
+                            <div class="col-1 text-end">
+                                <div>
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel"
+                                        [(ngModel)]="song.selected">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer" bis_skin_checked="1">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="addSong()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
