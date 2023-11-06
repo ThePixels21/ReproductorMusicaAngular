@@ -70,6 +70,7 @@ export class PlaylistComponent {
   }
 
   loadItems() {
+    this.playlistService.loadPlaylists()
     this.playlistService.getPlaylistById(this.id)
     .then(doc => {
       this.playlist = doc.data() as IPlaylist

@@ -3,6 +3,10 @@ import { SearchService } from '../search.service';
 import { ActivatedRoute } from '@angular/router';
 import { ISong } from 'src/app/models/ISong';
 import { SongService } from 'src/app/inicio/song.service';
+import { IPlaylist } from 'src/app/models/IPlaylist';
+import { MyPlaylistsService } from 'src/app/my-profile/my-playlists.service';
+import { SwalUtils } from 'src/app/utils/swal-utils';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-search-results',
@@ -19,11 +23,18 @@ export class SearchResultsComponent {
   songs !: ISong[]
   currentPlaylist!: ISong[]
 
+  myPlaylists: IPlaylist[] = []
+
   constructor(
     private searchService: SearchService,
     private songService: SongService,
+    private playlistService: MyPlaylistsService,
     private activatedRoute: ActivatedRoute
   ){
+
+    this.playlistService.getMyPlaylists().subscribe(playlists => {
+      this.myPlaylists = playlists
+    })
 
     this.songService.getCurrentSongId().subscribe(index => {
       this.currentSongId = index
@@ -56,6 +67,22 @@ export class SearchResultsComponent {
     this.songService.setCurrentSongId(song.id!!)
     this.songService.setCurrentSong(song)
     this.songService.setAudioUrlAndPlay(song.url)
+  }
+
+  addToPlaylist(songId: string, playlist: IPlaylist){
+    if(!playlist.songsIds.includes(songId)){
+      SwalUtils.loadingMessage('Adding song...')
+      playlist.songsIds.push(songId)
+      this.playlistService.updatePlaylistSongs(playlist.id, playlist.songsIds)
+      .then(res => {
+        Swal.close()
+        SwalUtils.customMessageOk('Added', 'Song added succesfully')
+        this.playlistService.loadPlaylists()
+      })
+      .catch(err => console.log(err))
+    }else {
+      SwalUtils.customMessageError('Error', 'Song is already added')
+    }
   }
 
 }

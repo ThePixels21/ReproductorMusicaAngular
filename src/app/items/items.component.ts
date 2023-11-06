@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ISong } from '../models/ISong';
 import { SongService } from '../inicio/song.service';
+import { IPlaylist } from '../models/IPlaylist';
+import { MyPlaylistsService } from '../my-profile/my-playlists.service';
+import { SwalUtils } from '../utils/swal-utils';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-items',
@@ -31,7 +35,16 @@ export class ItemsComponent {
   musicList: ISong[] = []
   currentPlaylist: ISong[] = []
 
-  constructor(private songs: SongService) {
+  myPlaylists: IPlaylist[] = []
+
+  constructor(
+    private songs: SongService, 
+    private myPlaylistService: MyPlaylistsService
+    ) {
+
+    this.myPlaylistService.getMyPlaylists().subscribe(playlists => {
+      this.myPlaylists = playlists
+    })
 
     this.songs.getAudio().subscribe(audio => {
       this.audio = audio
@@ -82,6 +95,7 @@ export class ItemsComponent {
         this.loading = false
       }
     })
+
   }
 
   ngOnInit(){
@@ -108,6 +122,22 @@ export class ItemsComponent {
   pause() {
     this.songs.pauseAudio()
     this.songs.setPaused(true)
+  }
+
+  addToPlaylist(songId: string, playlist: IPlaylist){
+    if(!playlist.songsIds.includes(songId)){
+      SwalUtils.loadingMessage('Adding song...')
+      playlist.songsIds.push(songId)
+      this.myPlaylistService.updatePlaylistSongs(playlist.id, playlist.songsIds)
+      .then(res => {
+        Swal.close()
+        SwalUtils.customMessageOk('Added', 'Song added succesfully')
+        this.myPlaylistService.loadPlaylists()
+      })
+      .catch(err => console.log(err))
+    }else {
+      SwalUtils.customMessageError('Error', 'Song is already added')
+    }
   }
 
 }

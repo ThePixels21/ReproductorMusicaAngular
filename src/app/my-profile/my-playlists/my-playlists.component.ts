@@ -24,13 +24,16 @@ export class MyPlaylistsComponent {
     private fb: FormBuilder,
     private playlistService: MyPlaylistsService, 
     private activatedRoute: ActivatedRoute
-    ){}
+    ){
+      this.playlistService.getMyPlaylists().subscribe(playlists => {
+        this.playlists = playlists
+      })
+    }
 
   ngOnInit(){
     this.formAdd = this.initForm()
     this.activatedRoute.parent!!.params.subscribe(params => {
       this.nickname = params['nickname']
-      this.loadItems()
     })
   }
 
@@ -38,15 +41,6 @@ export class MyPlaylistsComponent {
     return this.fb.group({
       name: ['', Validators.required]
     })
-  }
-
-  loadItems(){
-    this.playlistService.getPlaylistsByNickname(this.nickname)
-    .then(snap => {
-      this.playlists = snap.docs.map(doc => doc.data() as IPlaylist)
-      console.log(this.playlists)
-    })
-    .catch(err => console.log(err))
   }
 
   async addPlaylist(){
@@ -63,7 +57,7 @@ export class MyPlaylistsComponent {
         console.log(`Uploaded successful---------\n${result}`)
         Swal.close()
         SwalUtils.customMessageOk('Created', 'Playlist created succesfully')
-        this.loadItems()
+        this.playlistService.loadPlaylists()
       }catch(err){
         console.log(`Error creating playlist----------\n${err}`);
         SwalUtils.customMessageError('Error creating playlist', 'Contact support')
@@ -77,7 +71,7 @@ export class MyPlaylistsComponent {
     .then(res => {
       Swal.close()
       SwalUtils.customMessageOk('Deleted', 'Playlist deleted succesfully')
-      this.loadItems()
+      this.playlistService.loadPlaylists()
     })
     .catch(err => {
       console.log(err)

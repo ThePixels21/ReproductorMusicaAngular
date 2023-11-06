@@ -3,16 +3,42 @@ import { Firestore, collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, 
 import { getApps, initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { IPlaylist } from '../models/IPlaylist';
+import { BehaviorSubject } from 'rxjs';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyPlaylistsService {
 
-  constructor(private firestore: Firestore) {
+  private myPlaylists = new BehaviorSubject([] as IPlaylist[])
+
+  constructor(
+    private firestore: Firestore,
+    private loginService: LoginService
+  ) {
     if (!getApps().length) {
       initializeApp(environment.firebase)
     }
+    this.loginService.userDataReady.subscribe(() => {
+      this.loadPlaylists()
+    })
+  }
+
+  getMyPlaylists() {
+    return this.myPlaylists.asObservable()
+  }
+
+  setMyPlaylists(playlists: IPlaylist[]) {
+    this.myPlaylists.next(playlists)
+  }
+
+  loadPlaylists() {
+    this.getPlaylistsByNickname(sessionStorage.getItem('nickname')!!)
+      .then(snap => {
+        this.setMyPlaylists(snap.docs.map(doc => doc.data() as IPlaylist))
+      })
+      .catch(err => console.log(err))
   }
 
   savePlaylist(playlist: IPlaylist) {
@@ -60,6 +86,6 @@ export class MyPlaylistsService {
   deletePlaylist(playlistId: string) {
     const playlistRef = doc(this.firestore, 'playlists', playlistId);
     return deleteDoc(playlistRef);
-}
+  }
 
 }

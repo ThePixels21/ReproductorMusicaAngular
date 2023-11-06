@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, onAuthStateChanged, signInWithEmailAndPassword, User, signOut } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,42 +9,44 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class LoginService {
   private userSubject: BehaviorSubject<User | null>;
   user$: Observable<User | null>;
+  userDataReady = new ReplaySubject<void>();
 
   constructor(private auth: Auth, private firestore: Firestore) {
     this.userSubject = new BehaviorSubject<User | null>(null)
     this.user$ = this.userSubject.asObservable();
-    onAuthStateChanged(this.auth, (user) => {this.userSubject.next(user)})
+    onAuthStateChanged(this.auth, (user) => { this.userSubject.next(user) })
     this.userState().subscribe(res => {
-      if(res){
+      if (res) {
         this.saveUserData(res.uid)
-      }else{
+
+      } else {
         sessionStorage.clear()
       }
     })
   }
 
-  login(email: string, pass: string){
+  login(email: string, pass: string) {
     return signInWithEmailAndPassword(this.auth, email, pass);
   }
 
-  logout(){
+  logout() {
     return signOut(this.auth)
   }
 
-  userState(){
+  userState() {
     return this.user$
   }
 
-  getUserById(id: string){
+  getUserById(id: string) {
     const userRef = doc(this.firestore, 'users', id)
     return getDoc(userRef)
   }
 
-  saveUserData(id: string){
-    sessionStorage.setItem('uid', id)
-    this.getUserById(id)
-    .then(res => {
-      if(res.exists()){
+  async saveUserData(id: string) {
+    try {
+      sessionStorage.setItem('uid', id)
+      const res = await this.getUserById(id);
+      if (res.exists()) {
         const nickname: string = res.data()['nickname']
         const name: string = res.data()['name']
         const surname: string = res.data()['surname']
@@ -52,13 +54,13 @@ export class LoginService {
         sessionStorage.setItem('name', name)
         sessionStorage.setItem('surname', surname)
       }
-    })
-    .catch(err => {
+      this.userDataReady.next();
+    } catch (err) {
       console.log(err)
       sessionStorage.setItem('nickname', 'none')
       sessionStorage.setItem('name', 'none')
       sessionStorage.setItem('surname', 'none')
-    })
+    }
   }
 
 }
