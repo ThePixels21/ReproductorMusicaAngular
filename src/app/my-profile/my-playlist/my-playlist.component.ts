@@ -9,11 +9,11 @@ import { SwalUtils } from 'src/app/utils/swal-utils';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-playlist',
-  templateUrl: './playlist.component.html',
-  styleUrls: ['./playlist.component.css']
+  selector: 'app-my-playlist',
+  templateUrl: './my-playlist.component.html',
+  styleUrls: ['./my-playlist.component.css']
 })
-export class PlaylistComponent {
+export class MyPlaylistComponent {
 
   icLinesSuccess = '../../assets/icon/more_horizontal_lines.svg';
   icLinesWhite = '../../assets/icon/more_horizontal_lines_white.svg';

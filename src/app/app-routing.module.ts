@@ -12,7 +12,7 @@ import { SearchResultsComponent } from './barra-busqueda/search-results/search-r
 import { PlaylistsComponent } from './playlists/playlists/playlists.component';
 import { MySongsComponent } from './my-profile/my-songs/my-songs.component';
 import { MyPlaylistsComponent } from './my-profile/my-playlists/my-playlists.component';
-import { PlaylistComponent } from './my-profile/playlist/playlist.component';
+import { MyPlaylistComponent } from './my-profile/my-playlist/my-playlist.component';
 
 const routes: Routes = [
   {
@@ -72,7 +72,7 @@ const routes: Routes = [
       },
       {
         path: 'playlists/:playlistId',
-        component: PlaylistComponent
+        component: MyPlaylistComponent
       }
     ]
   }
