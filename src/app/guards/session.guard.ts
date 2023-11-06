@@ -3,6 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { LoginService } from '../login/login.service';
 import { catchError, map, switchMap, take, takeUntil, timeout } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { SwalUtils } from '../utils/swal-utils';
 
 export const sessionGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
@@ -12,6 +13,7 @@ export const sessionGuard: CanActivateFn = (route, state) => {
     take(1),
     catchError(() => {
       router.navigate(['/login']);
+      SwalUtils.customMessageError('Authentication error', 'You do not have access to this page')
       return of(false);
     }),
     switchMap(() => 
@@ -21,6 +23,7 @@ export const sessionGuard: CanActivateFn = (route, state) => {
             return true;
           } else {
             router.navigate(['/login']);
+            SwalUtils.customMessageError('Authentication error', 'You do not have access to this page')
             return false;
           }
         })

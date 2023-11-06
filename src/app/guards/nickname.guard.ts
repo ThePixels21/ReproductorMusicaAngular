@@ -3,6 +3,7 @@ import { LoginService } from '../login/login.service';
 import { inject } from '@angular/core';
 import { catchError, map, switchMap, take } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { SwalUtils } from '../utils/swal-utils';
 
 export const nicknameGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
@@ -11,6 +12,7 @@ export const nicknameGuard: CanActivateFn = (route, state) => {
     take(1),
     catchError(() => {
       router.navigate(['/home']);
+      SwalUtils.customMessageError('Authentication error', 'This is not your profile')
       return of(false);
     }),
     switchMap(() => 
@@ -20,6 +22,7 @@ export const nicknameGuard: CanActivateFn = (route, state) => {
             return true;
           } else {
             router.navigate(['/home']);
+            SwalUtils.customMessageError('Authentication error', 'This is not your profile')
             return false;
           }
         })
