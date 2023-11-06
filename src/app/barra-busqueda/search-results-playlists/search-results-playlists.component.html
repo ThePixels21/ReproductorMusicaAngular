@@ -1,5 +1,9 @@
-<app-barra-busqueda [collection]="'playlists'"></app-barra-busqueda>
 <div class="contenedor">
+    <div class="row">
+        <div class="col-12 text-white">
+            <h1>Results</h1>
+        </div>
+    </div>
     <ul class="list-group mb-2">
         <li class="list-group-item pb-0">
             <div class="row">
@@ -19,7 +23,7 @@
     </ul>
     <ul *ngIf="!loading && !(playlists.length>0)" class="list-group">
         <div class="row align-items-center text-center">
-            <div class="col-12 text-white">No playlists avaliable</div>
+            <div class="col-12 text-white">No playlists found</div>
         </div>
     </ul>
     <ul class="list-group footer-space">

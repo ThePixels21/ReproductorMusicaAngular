@@ -17,6 +17,7 @@ import { ProfileSongsComponent } from './artists/profile-songs/profile-songs.com
 import { ProfilePlaylistsComponent } from './artists/profile-playlists/profile-playlists.component';
 import { ProfilePlaylistComponent } from './artists/profile-playlist/profile-playlist.component';
 import { SearchResultsArtistsComponent } from './barra-busqueda/search-results-artists/search-results-artists.component';
+import { SearchResultsPlaylistsComponent } from './barra-busqueda/search-results-playlists/search-results-playlists.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'home/search/artists/:keyword',
         component: SearchResultsArtistsComponent
+      },
+      {
+        path: 'home/search/playlists/:keyword',
+        component: SearchResultsPlaylistsComponent
       },
       {
         path: 'playlists',
