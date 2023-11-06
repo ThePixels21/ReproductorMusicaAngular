@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -9,26 +9,33 @@ import { Router } from '@angular/router';
 })
 export class BarraBusquedaComponent {
 
+  @Input() collection!: string
   searchForm!: FormGroup
 
   constructor(
     private fb: FormBuilder,
     private router: Router
-  ){}
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.searchForm = this.initForm()
   }
 
-  initForm(){
+  initForm() {
     return this.fb.group({
       search: ['', [Validators.required]]
     })
   }
 
-  search(){
-    if(this.searchForm.valid){
-      this.router.navigate(['/home/search', this.searchForm.value.search])
+  search() {
+    if (this.searchForm.valid) {
+      if (this.collection == 'songs') {
+        this.router.navigate(['/home/search', this.searchForm.value.search])
+      } else if (this.collection == 'artists') {
+        this.router.navigate(['/home/search/artists', this.searchForm.value.search])
+      } else if (this.collection == 'playlists') {
+        this.router.navigate(['/home/search/playlists', this.searchForm.value.search])
+      }
     }
   }
 
