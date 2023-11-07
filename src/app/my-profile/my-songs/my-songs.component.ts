@@ -7,6 +7,7 @@ import { MyPlaylistsService } from '../my-playlists.service';
 import { IPlaylist } from 'src/app/models/IPlaylist';
 import { SwalUtils } from 'src/app/utils/swal-utils';
 import Swal from 'sweetalert2';
+import { Functions } from 'src/app/utils/utils-functions';
 
 @Component({
   selector: 'app-my-songs',
@@ -58,7 +59,7 @@ export class MySongsComponent {
       if (this.paused == true) {
         this.playing = false
       } else {
-        if (this.currentPlaylist.join() == this.songs.join()) {
+        if (!this.playing && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) === JSON.stringify(Functions.getSongIds(this.songs))) {
           this.playing = true
         }
       }
@@ -78,19 +79,17 @@ export class MySongsComponent {
         this.songs = snap.docs.map(doc => doc.data() as ISong)
         this.loading = false
         console.log(this.songs)
-        if (this.currentPlaylist.join() != this.songs.join()) {
-          this.playing = false
+        if (!this.paused && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) === JSON.stringify(Functions.getSongIds(this.songs))) {
+          this.playing = true
         } else {
-          if(!this.paused){
-            this.playing = true
-          }
+          this.playing = false
         }
       })
       .catch(err => console.log(err))
   }
 
   play(index: number) {
-    if (this.currentPlaylist.join() != this.songs.join()) {
+    if (!this.playing && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) != JSON.stringify(Functions.getSongIds(this.songs))) {
       this.songService.setCurrentPlaylist(this.songs)
       this.playing = true
     }

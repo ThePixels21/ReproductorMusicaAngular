@@ -6,6 +6,7 @@ import { IPlaylist } from '../models/IPlaylist';
 import { MyPlaylistsService } from '../my-profile/my-playlists.service';
 import { SwalUtils } from '../utils/swal-utils';
 import Swal from 'sweetalert2';
+import { Functions } from '../utils/utils-functions';
 
 @Component({
   selector: 'app-items',
@@ -83,7 +84,7 @@ export class ItemsComponent {
       if (this.pausado == true) {
         this.playing = false
       } else {
-        if (this.currentPlaylist == this.musicList) {
+        if (!this.playing && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) === JSON.stringify(Functions.getSongIds(this.musicList))) {
           this.playing = true
         }
       }
@@ -99,17 +100,15 @@ export class ItemsComponent {
   }
 
   ngOnInit(){
-    if (this.currentPlaylist != this.musicList) {
-      this.playing = false
+    if (!this.pausado && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) === JSON.stringify(Functions.getSongIds(this.musicList))) {
+      this.playing = true
     } else {
-      if(!this.pausado){
-        this.playing = true
-      }
+      this.playing = false
     }
   }
 
   play(index: number): void {
-    if(this.currentPlaylist != this.musicList){
+    if(!this.playing && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) != JSON.stringify(Functions.getSongIds(this.musicList))){
       this.songs.setCurrentPlaylist(this.musicList)
       this.playing = true
     }

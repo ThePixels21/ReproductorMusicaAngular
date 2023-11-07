@@ -7,6 +7,7 @@ import { ISong } from 'src/app/models/ISong';
 import { ISelectableSong } from 'src/app/models/ISelectableSong';
 import { SwalUtils } from 'src/app/utils/swal-utils';
 import Swal from 'sweetalert2';
+import { Functions } from 'src/app/utils/utils-functions';
 
 @Component({
   selector: 'app-my-playlist',
@@ -56,7 +57,7 @@ export class MyPlaylistComponent {
       if (this.paused == true) {
         this.playing = false
       } else {
-        if (this.currentPlaylist.join() == this.songs.join()) {
+        if (!this.playing && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) === JSON.stringify(Functions.getSongIds(this.songs))) {
           this.playing = true
         }
       }
@@ -83,7 +84,7 @@ export class MyPlaylistComponent {
             this.songs = songs as ISong[]
             this.loading = false
             console.log(this.songs)
-            if (this.currentPlaylist.join() == this.songs.join() && this.paused == false) {
+            if (!this.paused && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) === JSON.stringify(Functions.getSongIds(this.songs))) {
               this.playing = true
             } else {
               this.playing = false
@@ -99,7 +100,7 @@ export class MyPlaylistComponent {
   }
 
   play(index: number) {
-    if (this.currentPlaylist.join() != this.songs.join()) {
+    if (!this.playing && JSON.stringify(Functions.getSongIds(this.currentPlaylist)) != JSON.stringify(Functions.getSongIds(this.songs))) {
       this.songService.setCurrentPlaylist(this.songs)
       this.playing = true
     }
