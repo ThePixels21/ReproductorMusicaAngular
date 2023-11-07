@@ -20,6 +20,7 @@ import { SearchResultsArtistsComponent } from './barra-busqueda/search-results-a
 import { SearchResultsPlaylistsComponent } from './barra-busqueda/search-results-playlists/search-results-playlists.component';
 import { sessionGuard } from './guards/session.guard';
 import { nicknameGuard } from './guards/nickname.guard';
+import { UnsavedChangesGuard } from './guards/unsaved-changes.guard';
 
 const routes: Routes = [
   {
@@ -82,7 +83,8 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegistroComponent
+    component: RegistroComponent,
+    canDeactivate: [UnsavedChangesGuard]
   },
   {
     path: 'login',
