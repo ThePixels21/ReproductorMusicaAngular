@@ -33,6 +33,7 @@ export class PanelControlComponent {
 
   currentSong: ISong = {
     title: '',
+    lowerCaseTitle: '',
     artist: '',
     url: ''
   };

@@ -20,6 +20,7 @@ export class SongService {
 
   private current: ISong = {
     title: 'No song',
+    lowerCaseTitle: 'no song',
     artist: '',
     url: ''
   }

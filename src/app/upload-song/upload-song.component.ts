@@ -47,6 +47,7 @@ export class UploadSongComponent {
       var song: ISong = {
         userId: this.currentUser.uid,
         title: this.songForm.value.title,
+        lowerCaseTitle: this.songForm.value.title.toLowerCase(),
         artist: this.currentUser.nickname,
         url: ''
       }

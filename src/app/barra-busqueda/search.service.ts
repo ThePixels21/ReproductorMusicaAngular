@@ -9,8 +9,9 @@ export class SearchService {
   constructor(private firestore: Firestore) { }
 
   searchSongs(searchText:string){
+    searchText = searchText.toLowerCase()
     const songCollection = collection(this.firestore, 'songs')
-    const songQuery = query(songCollection, where('title', '>=', searchText), where('title', '<=', searchText + '\uf8ff'))
+    const songQuery = query(songCollection, where('lowerCaseTitle', '>=', searchText), where('lowerCaseTitle', '<=', searchText + '\uf8ff'))
     return getDocs(songQuery)
   }
 
