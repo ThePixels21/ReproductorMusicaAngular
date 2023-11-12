@@ -19,9 +19,11 @@ export class NavbarComponent {
   ) {
     this.loginService.getCurrentUser().subscribe(current => {
       this.currentUser = current
-    })
-    this.loginService.userDataReady.subscribe(() => {
-      this.activeSesion = true
+      if(this.currentUser != null){
+        this.activeSesion = true
+      }else{
+        this.activeSesion = false
+      }
     })
   }
 

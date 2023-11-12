@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Auth, onAuthStateChanged, signInWithEmailAndPassword, User, signOut } from '@angular/fire/auth';
+import { Auth, onAuthStateChanged, signInWithEmailAndPassword, User, signOut, sendPasswordResetEmail } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
-import { MyPlaylistsService } from '../my-profile/my-playlists.service';
 import IUser from '../models/IUser';
 
 @Injectable({
@@ -20,7 +19,7 @@ export class LoginService {
   }
 
   private userSubject: BehaviorSubject<User | null>;
-  private currentUser = new BehaviorSubject(this.emptyUser)
+  private currentUser: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
   user$: Observable<User | null>;
   userDataReady = new ReplaySubject<void>();
 
@@ -50,6 +49,7 @@ export class LoginService {
 
   logout() {
     sessionStorage.clear()
+    this.currentUser.next(null)
     return signOut(this.auth)
   }
 
@@ -66,7 +66,7 @@ export class LoginService {
     try {
       const res = await this.getUserById(id);
       if (res.exists()) {
-        if(this.auth.currentUser != null){
+        if (this.auth.currentUser != null) {
           this.currentUser.next(res.data() as IUser)
           this.userDataReady.next();
         }
@@ -74,6 +74,10 @@ export class LoginService {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  sendResetPasswordEmail(email: string) {
+    return sendPasswordResetEmail(this.auth, email)
   }
 
 }

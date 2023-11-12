@@ -45,4 +45,17 @@ export class LoginComponent {
         })
     }
   }
+
+  resetPassword(){
+    if(this.formLogin.get('correo')?.valid){
+      this.loginService.sendResetPasswordEmail(this.formLogin.value.correo)
+      .then(res => {
+        SwalUtils.customMessageOk('Email sent', 'An email was sent to reset your password')
+      })
+      .catch(err => {
+        console.log(err)
+        SwalUtils.customMessageError('Error', 'Error sending email')
+      })
+    }
+  }
 }

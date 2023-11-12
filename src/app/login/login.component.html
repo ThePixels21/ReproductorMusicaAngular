@@ -24,6 +24,7 @@
                 </div>
                 <div class="boton text-center mb-4 d-grid gap-2 col-3 mx-auto">
                     <button type="submit" class="btn btn-success pe-3 ps-3 rounded-pill">Sign in</button>
+                    <label *ngIf="formLogin.get('correo')?.touched" class="pointer gray-color" (click)="resetPassword()">Send reset password email</label>
                 </div>
             </form>
         </div>
