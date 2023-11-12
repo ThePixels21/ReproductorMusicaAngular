@@ -21,6 +21,7 @@ export class MySongsComponent {
   icLinesWhite = '../../assets/icon/more_horizontal_lines_white.svg';
   icPause = '../../assets/icon/pause.svg';
   icPlay = '../../assets/icon/play.svg';
+  icAdd = '../../../assets/icon/add.svg'
 
   loading = true
 

@@ -5,6 +5,7 @@
                 <h6>Released</h6>
             </div>
             <div class="col-1 text-end">
+                <img [src]="icAdd" class="play" routerLink="/upload">
                 <img *ngIf="!playing" (click)="play(0)" class="play" [src]="icPlay">
                 <img *ngIf="playing" (click)="pause()" class="play" [src]="icPause">
             </div>
