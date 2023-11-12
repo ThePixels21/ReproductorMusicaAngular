@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { IPlaylist } from '../models/IPlaylist';
 import { BehaviorSubject } from 'rxjs';
 import { LoginService } from '../login/login.service';
+import IUser from '../models/IUser';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { LoginService } from '../login/login.service';
 export class MyPlaylistsService {
 
   private myPlaylists = new BehaviorSubject([] as IPlaylist[])
+  private currentUser: IUser | null = null
 
   constructor(
     private firestore: Firestore,
@@ -20,6 +22,9 @@ export class MyPlaylistsService {
     if (!getApps().length) {
       initializeApp(environment.firebase)
     }
+    this.loginService.getCurrentUser().subscribe(current =>{
+      this.currentUser = current
+    })
     this.loginService.userDataReady.subscribe(() => {
       this.loadPlaylists()
     })
@@ -39,11 +44,13 @@ export class MyPlaylistsService {
   }
 
   loadPlaylists() {
-    this.getPlaylistsByNickname(sessionStorage.getItem('nickname')!!)
+    if(this.currentUser != null){
+      this.getPlaylistsByNickname(this.currentUser.nickname)
       .then(snap => {
         this.setMyPlaylists(snap.docs.map(doc => doc.data() as IPlaylist))
       })
       .catch(err => console.log(err))
+    }
   }
 
   savePlaylist(playlist: IPlaylist) {

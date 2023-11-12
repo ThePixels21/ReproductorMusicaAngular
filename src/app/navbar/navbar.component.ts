@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { Router } from '@angular/router';
+import IUser from '../models/IUser';
 
 @Component({
   selector: 'app-navbar',
@@ -10,27 +11,30 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
 
   activeSesion: boolean = false
+  private currentUser: IUser | null = null
 
-  constructor(private loginService: LoginService, private router: Router){
-    this.loginService.userState().subscribe(res => {
-      if(res){
-        this.activeSesion = true
-      }else{
-        this.activeSesion = false
-      }
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) {
+    this.loginService.getCurrentUser().subscribe(current => {
+      this.currentUser = current
+    })
+    this.loginService.userDataReady.subscribe(() => {
+      this.activeSesion = true
     })
   }
 
-  logout(){
+  logout() {
     this.loginService.logout()
-    .then(res => {
-      console.log("Logout successful")
-    })
-    .catch(error => console.log(error))
+      .then(res => {
+        console.log("Logout successful")
+      })
+      .catch(error => console.log(error))
   }
 
-  onProfile(){
-    this.router.navigate(['/my-profile', sessionStorage.getItem('nickname'), 'songs'])
+  onProfile() {
+    this.router.navigate(['/my-profile', this.currentUser?.nickname, 'songs'])
   }
 
 }

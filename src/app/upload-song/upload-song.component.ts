@@ -5,6 +5,8 @@ import { ISong } from '../models/ISong';
 import { SwalUtils } from '../utils/swal-utils';
 import Swal from 'sweetalert2';
 import { SongService } from '../inicio/song.service';
+import { LoginService } from '../login/login.service';
+import IUser from '../models/IUser';
 
 @Component({
   selector: 'app-upload-song',
@@ -16,12 +18,18 @@ export class UploadSongComponent {
   songForm!: FormGroup
   fileTouched = false
   titleTouched = false
+  private currentUser: IUser | null = null
 
   constructor(
     private uploadSongService: UploadSongService, 
     private songService: SongService,
+    private loginService: LoginService,
     private fb: FormBuilder
-    ){}
+    ){
+      this.loginService.getCurrentUser().subscribe(current =>{
+        this.currentUser = current
+      })
+    }
 
   ngOnInit(){
     this.songForm = this.initializeForm()
@@ -35,11 +43,11 @@ export class UploadSongComponent {
   }
 
   async uploadSong(){
-    if(this.songForm.valid && this.songForm.get('file')!!.value != null){
+    if(this.songForm.valid && this.songForm.get('file')!!.value != null && this.currentUser != null){
       var song: ISong = {
-        userId: sessionStorage.getItem('uid')!!,
+        userId: this.currentUser.uid,
         title: this.songForm.value.title,
-        artist: sessionStorage.getItem('nickname')!!,
+        artist: this.currentUser.nickname,
         url: ''
       }
       const file: File = this.songForm.get('file')!!.value

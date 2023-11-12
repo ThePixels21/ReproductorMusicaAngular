@@ -3,19 +3,31 @@ import { Auth, onAuthStateChanged, signInWithEmailAndPassword, User, signOut } f
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { MyPlaylistsService } from '../my-profile/my-playlists.service';
+import IUser from '../models/IUser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+
+  private emptyUser: IUser = {
+    uid: '',
+    name: '',
+    surname: '',
+    nickname: '',
+    age: 0,
+    email: ''
+  }
+
   private userSubject: BehaviorSubject<User | null>;
+  private currentUser = new BehaviorSubject(this.emptyUser)
   user$: Observable<User | null>;
   userDataReady = new ReplaySubject<void>();
 
   constructor(
-    private auth: Auth, 
+    private auth: Auth,
     private firestore: Firestore
-    ) {
+  ) {
     this.userSubject = new BehaviorSubject<User | null>(null)
     this.user$ = this.userSubject.asObservable();
     onAuthStateChanged(this.auth, (user) => { this.userSubject.next(user) })
@@ -26,6 +38,10 @@ export class LoginService {
         sessionStorage.clear()
       }
     })
+  }
+
+  getCurrentUser() {
+    return this.currentUser.asObservable()
   }
 
   login(email: string, pass: string) {
@@ -48,22 +64,15 @@ export class LoginService {
 
   async saveUserData(id: string) {
     try {
-      sessionStorage.setItem('uid', id)
       const res = await this.getUserById(id);
       if (res.exists()) {
-        const nickname: string = res.data()['nickname']
-        const name: string = res.data()['name']
-        const surname: string = res.data()['surname']
-        sessionStorage.setItem('nickname', nickname)
-        sessionStorage.setItem('name', name)
-        sessionStorage.setItem('surname', surname)
+        if(this.auth.currentUser != null){
+          this.currentUser.next(res.data() as IUser)
+          this.userDataReady.next();
+        }
       }
-      this.userDataReady.next();
     } catch (err) {
       console.log(err)
-      sessionStorage.setItem('nickname', 'none')
-      sessionStorage.setItem('name', 'none')
-      sessionStorage.setItem('surname', 'none')
     }
   }
 
