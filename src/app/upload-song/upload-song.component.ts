@@ -21,29 +21,29 @@ export class UploadSongComponent {
   private currentUser: IUser | null = null
 
   constructor(
-    private uploadSongService: UploadSongService, 
+    private uploadSongService: UploadSongService,
     private songService: SongService,
     private loginService: LoginService,
     private fb: FormBuilder
-    ){
-      this.loginService.getCurrentUser().subscribe(current =>{
-        this.currentUser = current
-      })
-    }
+  ) {
+    this.loginService.getCurrentUser().subscribe(current => {
+      this.currentUser = current
+    })
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.songForm = this.initializeForm()
   }
-  
-  initializeForm(){
+
+  initializeForm() {
     return this.fb.group({
       title: ['', [Validators.required]],
       file: [null, [Validators.required]]
     })
   }
 
-  async uploadSong(){
-    if(this.songForm.valid && this.songForm.get('file')!!.value != null && this.currentUser != null){
+  async uploadSong() {
+    if (this.songForm.valid && this.songForm.get('file')!!.value != null && this.currentUser != null) {
       var song: ISong = {
         userId: this.currentUser.uid,
         title: this.songForm.value.title,
@@ -52,7 +52,7 @@ export class UploadSongComponent {
       }
       const file: File = this.songForm.get('file')!!.value
       console.log(file)
-      if(file.type.startsWith('audio/')){
+      if (file.type.startsWith('audio/')) {
         SwalUtils.loadingMessage('Uploading...')
         try {
           const res = await this.uploadSongService.uploadSong(file);
@@ -63,11 +63,12 @@ export class UploadSongComponent {
           Swal.close()
           SwalUtils.customMessageOk('Uploaded', 'Song uploaded succesfully')
           this.songService.updateMusicList()
+          this.resetForm()
         } catch (err) {
           console.log(`Error uploading song----------\n${err}`);
           SwalUtils.customMessageError('Error uploading', 'Contact support')
         }
-      }else {
+      } else {
         SwalUtils.customMessageError('Error', 'Audio files only')
         console.log('Only supported songs')
       }
@@ -83,9 +84,17 @@ export class UploadSongComponent {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.songForm.get('file')!!.setValue(file);
-    }else {
+    } else {
       this.songForm.get('file')!!.setValue(null);
     }
+  }
+
+  resetForm() {
+    this.songForm = this.initializeForm()
+    this.fileTouched = false
+    this.titleTouched = false
+    let fileInput: any = document.querySelector('#fileInput')
+    fileInput.value = ''
   }
 
 }

@@ -13,7 +13,7 @@
                 </div>
                 <div class="mb-5">
                     <label class="form-label text-white">Song file</label>
-                    <input class="form-control text-white" type="file" accept="audio/*" (change)="onFileChange($event)">
+                    <input id="fileInput" class="form-control text-white" type="file" accept="audio/*" (change)="onFileChange($event)">
                     <div *ngIf="fileTouched && songForm.get('file')?.value == null"
                         class="alert alert-danger mt-2" role="alert">File is required</div>
                 </div>
